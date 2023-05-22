@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2716330542586679014}
   - component: {fileID: 1173316959345270702}
   m_Layer: 0
-  m_Name: Plane (2)
+  m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,11 +143,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c953d6ea19f4a3781a3c8c748f4a290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canHasPartSample: 1
   moveSpeed: 5
   nextSpawnPosition: {x: 0, y: 0, z: 35}
   destroyPosition: {x: 0, y: 0, z: -35}
   partChunkSampleFirstPosition: {x: 0, y: 0, z: 0}
-  partChunkSampleSecondPosition: {x: 0, y: 0, z: 0}
+  partChunkSampleSecondPosition: {x: 0, y: 0, z: 20}
   OnDestroyed:
     m_PersistentCalls:
       m_Calls: []

@@ -1,18 +1,17 @@
-using System;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
     [RequireComponent(typeof(Collider))]
-    public class Spike : MonoBehaviour
+    public class JellyPart : MonoBehaviour
     {
-        [SerializeField] private float damage;
+        [SerializeField] private float healthPoint;
 
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out Player player)) return;
             
-            player.TakeDamage(damage);
+            player.Heal(healthPoint);
             Destroy(gameObject);
         }
     }

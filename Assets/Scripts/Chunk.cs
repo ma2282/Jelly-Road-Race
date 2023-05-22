@@ -6,6 +6,7 @@ namespace Game.Gameplay
 {
     public class Chunk : MonoBehaviour
     {
+        [SerializeField] private bool canHasPartSample;
         [SerializeField] private float moveSpeed;
         
         [SerializeField] private Vector3 nextSpawnPosition;
@@ -18,9 +19,11 @@ namespace Game.Gameplay
         public Vector3 NextSpawnPosition => nextSpawnPosition;
 
         public UnityEvent OnDestroyed;
-        
-        private void Start()
+
+        public void Initialize()
         {
+            if (_transform != null) return;
+            
             _transform = GetComponent<Transform>();
             
             Vector3 position = _transform.position;
@@ -41,6 +44,8 @@ namespace Game.Gameplay
             
             _transform.Translate(shift);
             nextSpawnPosition += shift;
+            partChunkSampleFirstPosition += shift;
+            partChunkSampleSecondPosition += shift;
 
             if ((_transform.position - destroyPosition).sqrMagnitude > moveSpeed * Time.deltaTime) return;
             
@@ -50,8 +55,16 @@ namespace Game.Gameplay
 
         public void GenerateSample(ChunkPart part1, ChunkPart part2)
         {
+            Initialize();
+            if (!canHasPartSample) return;
+            
             Instantiate(part1, partChunkSampleFirstPosition, Quaternion.identity, _transform);
             Instantiate(part2, partChunkSampleSecondPosition, Quaternion.identity, _transform);
+        }
+
+        public void SpawnTrail(GameObject trail)
+        {
+            Instantiate(trail, trail.transform.position, Quaternion.identity, _transform);
         }
     }
 }

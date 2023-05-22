@@ -11,10 +11,14 @@ namespace Game.Gameplay
         
         private void Update()
         {
-            _horizontalMovement = Input.GetAxis("Horizontal");
-
-            if (_horizontalMovement != 0f || _verticalMovement != 0f)
+            _horizontalMovement = (Input.GetKeyDown(KeyCode.D) ? 1f : 0f) + (Input.GetKeyDown(KeyCode.A) ? -1f : 0f);
+            _verticalMovement = (Input.GetKeyDown(KeyCode.W) ? 1f : 0f) + (Input.GetKeyDown(KeyCode.S) ? -1f : 0f);
+            
+            if (_horizontalMovement != 0f)
                 GameManager.Instance.Player.Move(_horizontalMovement);
+
+            if (_verticalMovement != 0f)
+                GameManager.Instance.ChangeTimeScale(_verticalMovement);
         }
     }
 }

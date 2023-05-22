@@ -19,6 +19,12 @@ namespace Game.Gameplay
         
         private JellyVertex[] _jellyVertices;
         private Vector3[] _verticesArray;
+        
+        public float Mass
+        {
+            get => mass;
+            set => mass = value;
+        }
 
         private void Start()
         {
@@ -51,6 +57,19 @@ namespace Game.Gameplay
             }
 
             _cloneMesh.vertices = _verticesArray;
+        }
+
+        public void Reset()
+        {
+            StartCoroutine(nameof(ResetCoroutine));
+        }
+
+        private IEnumerator ResetCoroutine()
+        {
+            float intensityNow = intensity;
+            intensity = 0f;
+            yield return new WaitForSeconds(1f);
+            intensity = intensityNow;
         }
     }
 }
