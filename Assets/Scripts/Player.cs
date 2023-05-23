@@ -44,10 +44,7 @@ namespace Game.Gameplay
                 if (value < 0f || health < 0f)
                     Kill();
                 else
-                {
                     health = value;
-                    UpdateMass();
-                }
             }
         }
 
@@ -125,20 +122,13 @@ namespace Game.Gameplay
                 throw new ArgumentException("Health Point less than zero");
 
             _animator.SetTrigger(HealTrigger);
-            
-            ColorsManager.Instance.ChangeColor();
-            
+
             Health += healthPoint;
         }
         
         private void Kill()
         {
             OnKilled.Invoke();
-        }
-
-        private void UpdateMass()
-        {
-            _jellyMesh.Mass = health + health / 2;
         }
     }
 }

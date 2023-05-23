@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18cd5682a034502bd9cad2b31b78cff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxChunksCount: 10
+  maxChunksCount: 5
   chunkPrefab: {fileID: 7113005884581129718, guid: 0b6787391400cf74ebecaffbd5574b0e, type: 3}
   chunks:
   - {fileID: 1189610014395949824}
@@ -227,6 +227,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   otherRenderers: []
+  _postProcessProfile: {fileID: 11400000, guid: e6c030c777613b54da50d5736a81b150, type: 2}
 --- !u!1001 &8229238888534232822
 PrefabInstance:
   m_ObjectHideFlags: 0
