@@ -10,7 +10,7 @@ namespace Game.Gameplay
     public class ChunkManager : Singleton<ChunkManager>
     {
         [SerializeField] private int maxChunksCount;
-
+        
         [SerializeField] private Chunk chunkPrefab;
         [SerializeField] private List<Chunk> chunks;
         [SerializeField] private List<ChunkPart> chunkPartSamples;

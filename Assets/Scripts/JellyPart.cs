@@ -15,6 +15,7 @@ namespace Game.Gameplay
             
             player.Heal(healthPoint);
             ColorsManager.Instance.ChangeColor(color, curve);
+            UIManager.Instance.AddCoins(1);
             Destroy(gameObject);
         }
     }
