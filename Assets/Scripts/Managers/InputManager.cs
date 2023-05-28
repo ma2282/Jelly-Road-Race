@@ -11,7 +11,6 @@ namespace Game.Gameplay
         
         private void Update()
         {
-            print(UIManager.Instance.IsPaused);
             if (!UIManager.Instance.IsPaused)
             {
                 _horizontalMovement = (Input.GetKeyDown(KeyCode.D) ? 1f : 0f) + (Input.GetKeyDown(KeyCode.A) ? -1f : 0f);
@@ -22,6 +21,12 @@ namespace Game.Gameplay
 
                 if (_verticalMovement != 0f)
                     GameManager.Instance.ChangeTimeScale(_verticalMovement);
+
+                if (Input.GetKeyDown(KeyCode.Q))
+                    GameManager.Instance.Player.ShiftColor(-1);
+                
+                if (Input.GetKeyDown(KeyCode.E))
+                    GameManager.Instance.Player.ShiftColor(1);
             }
         }
     }

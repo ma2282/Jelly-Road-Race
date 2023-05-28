@@ -19,7 +19,6 @@ namespace Game.Gameplay
         private static readonly int HealTrigger = Animator.StringToHash("Heal");
         private static readonly int IdleBool = Animator.StringToHash("IsIdle");
 
-
         private float moveDistance;
         
         private Quaternion _targetRotation;
@@ -30,6 +29,8 @@ namespace Game.Gameplay
         private JellyMesh _jellyMesh;
         
         private Animator _animator;
+        
+        private ColorsInventory _inventory;
             
         private CoroutineObject _moveCoroutine;
 
@@ -54,7 +55,9 @@ namespace Game.Gameplay
             _animator = GetComponent<Animator>();
             _collider = GetComponent<BoxCollider>();
             _jellyMesh = GetComponentInChildren<JellyMesh>();
-            
+
+            _inventory = new ColorsInventory();
+
             _moveCoroutine = new CoroutineObject(this, MoveCoroutine);
         }
 
@@ -129,6 +132,27 @@ namespace Game.Gameplay
         private void Kill()
         {
             OnKilled.Invoke();
+        }
+
+        public void ChangeColor(GameColor color)
+        {
+            _inventory.AddColor(color);
+        }
+
+        public void ShiftColor(int shift)
+        {
+            _inventory.ChangeIndex(shift);
+            _inventory.ApplyColor();
+        }
+
+        public void Reset()
+        {
+            positionState = 1;
+            health = 1f;
+            moveSpeed = 1f;
+            _inventory = new ColorsInventory();
+            _jellyMesh.Reset();
+            _transform.position = allPositions[positionState];
         }
     }
 }

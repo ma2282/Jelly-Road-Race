@@ -67,7 +67,7 @@ namespace Game.Gameplay
         private IEnumerator ResetCoroutine()
         {
             float intensityNow = intensity;
-            intensity = 0f;
+            intensity = 1f;
             yield return new WaitForSeconds(1f);
             intensity = intensityNow;
         }

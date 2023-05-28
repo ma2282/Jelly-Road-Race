@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using NTC.Global.System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Gameplay
 {
@@ -10,22 +11,26 @@ namespace Game.Gameplay
         [SerializeField] private float maxTimeScale;
         [SerializeField] private float minTimeScale;
         [SerializeField] private float timeScaleStep;
-        
+
         [SerializeField] private Player player;
 
+        [SerializeField] private GameObject[] gameplayGameObjects;
+        [SerializeField] private GameObject[] homeGameObjects;
+
+        private CoroutineObject _addingScoreCoroutine;
+
         public Player Player => player;
-        
 
         private void Start()
         {
-            StartCoroutine(nameof(AddingScore));
+            _addingScoreCoroutine = new CoroutineObject(this, AddingScore);
         }
 
         private IEnumerator AddingScore()
         {
             while (true)
             {
-                UIManager.Instance.AddScore(1);
+                ValuesManager.Instance.AddScore(1);
                 yield return new WaitForSeconds(1f);
             }
         }
@@ -39,7 +44,45 @@ namespace Game.Gameplay
 
         private void OnApplicationQuit()
         {
+            ValuesManager.Instance.Save();
             ColorsManager.Instance.ResetColors();
+        }
+
+        private void InitializeGameplay()
+        {
+            ChunkManager.Instance.StartMoving();
+            _addingScoreCoroutine.Start();
+            UIManager.Instance.StartGame();
+        }
+        
+        private void InitializeHome()
+        {
+            player.Reset();
+            ChunkManager.Instance.Reset();
+            _addingScoreCoroutine.Stop();
+            ValuesManager.Instance.Save();
+        }
+        
+        public void StopGame()
+        {
+            foreach (GameObject obj in gameplayGameObjects)
+                obj.SetActive(false);
+            
+            foreach (GameObject obj in homeGameObjects)
+                obj.SetActive(true);
+
+            InitializeHome();
+        }
+        
+        public void StartGame()
+        {
+            foreach (GameObject obj in homeGameObjects)
+                obj.SetActive(false);
+            
+            foreach (GameObject obj in gameplayGameObjects)
+                obj.SetActive(true);
+
+            InitializeGameplay();
         }
     }
 }

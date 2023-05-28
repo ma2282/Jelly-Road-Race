@@ -14,8 +14,16 @@ namespace Game.Gameplay
         [SerializeField] private Vector3 partChunkSampleFirstPosition;
         [SerializeField] private Vector3 partChunkSampleSecondPosition;
 
+        private bool _isMoving;
+
         private Transform _transform;
 
+        public bool CanHasPartSample
+        {
+            get => canHasPartSample;
+            set => canHasPartSample = value;
+        }
+        
         public Vector3 NextSpawnPosition => nextSpawnPosition;
 
         public UnityEvent OnDestroyed;
@@ -35,7 +43,8 @@ namespace Game.Gameplay
 
         private void Update()
         {
-            Move();
+            if (_isMoving)
+                Move();
         }
 
         private void Move()
@@ -65,6 +74,11 @@ namespace Game.Gameplay
         public void SpawnTrail(GameObject trail)
         {
             Instantiate(trail, trail.transform.position, Quaternion.identity, _transform);
+        }
+
+        public void StartMoving()
+        {
+            _isMoving = true;
         }
     }
 }

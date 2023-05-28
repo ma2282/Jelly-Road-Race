@@ -21,6 +21,11 @@ namespace Game.Gameplay
         {
             _transform = GetComponent<Transform>();
 
+            InitializeChunks();
+        }
+
+        private void InitializeChunks()
+        {
             while (chunks.Count < maxChunksCount)
                 SpawnNewChunk();
 
@@ -45,7 +50,7 @@ namespace Game.Gameplay
 
         private Chunk SpawnNewChunk()
         {
-            Chunk chunk = Instantiate(chunkPrefab, chunks.Last().NextSpawnPosition, Quaternion.identity, _transform);
+            Chunk chunk = Instantiate(chunkPrefab, chunks.Count == 0 ? Vector3.zero : chunks.Last().NextSpawnPosition, Quaternion.identity, _transform);
             chunk.Initialize();
             chunks.Add(chunk);
             return chunk;
@@ -54,6 +59,25 @@ namespace Game.Gameplay
         public void SpawnTrail(GameObject trail)
         {
             chunks[0].SpawnTrail(trail);
+        }
+
+        public void StartMoving()
+        {
+            foreach (Chunk chunk in chunks)
+                chunk.StartMoving();
+        }
+
+        public void Reset()
+        {
+            foreach (Chunk chunk in chunks)
+                Destroy(chunk.gameObject);
+
+            chunks = new List<Chunk>();
+
+            Chunk firstChunk = SpawnNewChunk();
+            firstChunk.CanHasPartSample = false;
+            
+            InitializeChunks();
         }
     }
 }

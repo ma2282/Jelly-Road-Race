@@ -15,12 +15,15 @@ namespace Game.Gameplay
 
         public void ResumeGame() => pauseMenuUI.ResumeGame();
 
-        public void ChangeCoins(int coins) => gameplayUI.ChangeScore(coins);
+        public void ChangeCoins(int coins) => gameplayUI.ChangeCoins(coins);
 
         public void ChangeScore(int score) => gameplayUI.ChangeScore(score);
 
-        public void AddCoins(int coins) => gameplayUI.AddCoins(coins);
+        public void ChangeRecordScore(int recordScore) => pauseMenuUI.ChangeRecordScore(recordScore);
 
-        public void AddScore(int score) => gameplayUI.AddScore(score);
+        public void StartGame()
+        {
+            pauseMenuUI.Initialize();
+        }
     }
 }
