@@ -25,8 +25,8 @@ namespace Game.Gameplay
             else
             {
                 _colors.Add(color);
-                    
-                ChangeIndex(1);
+
+                ChangeIndex(GetColorIndex(color));
                 
                 ApplyColor();
             }
@@ -34,12 +34,12 @@ namespace Game.Gameplay
 
         public GameColor GetColor(int shift = 0)
         {
-            ChangeIndex(shift);
+            ChangeIndexByShift(shift);
             
             return _colors[_indexNow];
         }
 
-        public void ChangeIndex(int shift)
+        public void ChangeIndexByShift(int shift)
         {
             if (shift == 0)
                 return;
@@ -47,6 +47,11 @@ namespace Game.Gameplay
             int index = (_indexNow + shift) % _colors.Count;
             index = (index < 0) ? _colors.Count - 1 : index;
 
+            _indexNow = index;
+        }
+        
+        public void ChangeIndex(int index)
+        {
             _indexNow = index;
         }
 

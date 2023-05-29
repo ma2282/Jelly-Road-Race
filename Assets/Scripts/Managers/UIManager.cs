@@ -5,12 +5,12 @@ namespace Game.Gameplay
 {
     public class UIManager : Singleton<UIManager>
     {
+        [SerializeField] private StartUI startUI;
         [SerializeField] private GameplayUI gameplayUI;
         [SerializeField] private PauseMenuUI pauseMenuUI;
+        [SerializeField] private GameOverUI gameOverUI;
 
-        public bool IsPaused => pauseMenuUI.IsPaused;
 
-        
         public void PauseGame() => pauseMenuUI.PauseGame();
 
         public void ResumeGame() => pauseMenuUI.ResumeGame();

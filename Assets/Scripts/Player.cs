@@ -10,7 +10,7 @@ namespace Game.Gameplay
     {
         [SerializeField] private int positionState = 1;
         [SerializeField] private float health = 1f;
-        [SerializeField] private float moveSpeed = 1f;
+        [SerializeField] private float moveSpeed = 10f;
         [SerializeField] private float epsilonSqrMagnitude;
         [SerializeField] private Vector3[] allPositions;
         [SerializeField] private Transform trailTransform;
@@ -42,7 +42,7 @@ namespace Game.Gameplay
             get => health;
             private set
             {
-                if (value < 0f || health < 0f)
+                if (value <= 0f || health <= 0f)
                     Kill();
                 else
                     health = value;
@@ -141,7 +141,7 @@ namespace Game.Gameplay
 
         public void ShiftColor(int shift)
         {
-            _inventory.ChangeIndex(shift);
+            _inventory.ChangeIndexByShift(shift);
             _inventory.ApplyColor();
         }
 
@@ -149,10 +149,10 @@ namespace Game.Gameplay
         {
             positionState = 1;
             health = 1f;
-            moveSpeed = 1f;
+            moveSpeed = 10f;
             _inventory = new ColorsInventory();
-            _jellyMesh.Reset();
             _transform.position = allPositions[positionState];
+            _jellyMesh.Reset();
         }
     }
 }

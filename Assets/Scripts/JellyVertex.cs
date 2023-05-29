@@ -24,5 +24,12 @@ namespace Game.Gameplay
             if ((Velocity + Force + Force / mass).magnitude < 0.001f)
                 Position = target;
         }
+
+        public void Reset(Vector3 target)
+        {
+            Force = Vector3.zero;
+            Velocity = Vector3.zero;
+            Position = target;
+        }
     }
 }

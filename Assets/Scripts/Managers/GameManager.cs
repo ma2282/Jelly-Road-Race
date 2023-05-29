@@ -16,14 +16,18 @@ namespace Game.Gameplay
 
         [SerializeField] private GameObject[] gameplayGameObjects;
         [SerializeField] private GameObject[] homeGameObjects;
+        [SerializeField] private GameObject[] gameOverGameObjects;
 
         private CoroutineObject _addingScoreCoroutine;
 
+        public bool IsPaused { get; set; } = true;
+        
         public Player Player => player;
 
         private void Start()
         {
             _addingScoreCoroutine = new CoroutineObject(this, AddingScore);
+            player.OnKilled.AddListener(FinishGame);
         }
 
         private IEnumerator AddingScore()
@@ -33,6 +37,20 @@ namespace Game.Gameplay
                 ValuesManager.Instance.AddScore(1);
                 yield return new WaitForSeconds(1f);
             }
+        }
+
+        private void FinishGame()
+        {
+            foreach (GameObject obj in homeGameObjects)
+                obj.SetActive(false);
+            
+            foreach (GameObject obj in gameplayGameObjects)
+                obj.SetActive(false);
+            
+            foreach (GameObject obj in gameOverGameObjects)
+                obj.SetActive(true);
+            
+            InitializeHome();
         }
 
         public void ChangeTimeScale(float verticalMovement)
@@ -50,6 +68,7 @@ namespace Game.Gameplay
 
         private void InitializeGameplay()
         {
+            Time.timeScale = 1f;
             ChunkManager.Instance.StartMoving();
             _addingScoreCoroutine.Start();
             UIManager.Instance.StartGame();
@@ -61,11 +80,15 @@ namespace Game.Gameplay
             ChunkManager.Instance.Reset();
             _addingScoreCoroutine.Stop();
             ValuesManager.Instance.Save();
+            ValuesManager.Instance.ResetScore();
         }
         
         public void StopGame()
         {
             foreach (GameObject obj in gameplayGameObjects)
+                obj.SetActive(false);
+            
+            foreach (GameObject obj in gameOverGameObjects)
                 obj.SetActive(false);
             
             foreach (GameObject obj in homeGameObjects)
@@ -77,6 +100,9 @@ namespace Game.Gameplay
         public void StartGame()
         {
             foreach (GameObject obj in homeGameObjects)
+                obj.SetActive(false);
+            
+            foreach (GameObject obj in gameOverGameObjects)
                 obj.SetActive(false);
             
             foreach (GameObject obj in gameplayGameObjects)

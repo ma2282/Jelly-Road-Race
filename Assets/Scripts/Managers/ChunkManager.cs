@@ -38,6 +38,7 @@ namespace Game.Gameplay
             chunks.RemoveAt(0);
             Chunk newChunk = SpawnNewChunk();
             InitializeChunk(newChunk);
+            newChunk.StartMoving();
         }
 
         private void InitializeChunk(Chunk chunk)

@@ -16,10 +16,12 @@ namespace Game.Gameplay
         private Transform _transform;
         private Mesh _originalMesh, _cloneMesh;
         private MeshRenderer _meshRenderer;
+
+        private CoroutineObject _resetCoroutine;
         
         private JellyVertex[] _jellyVertices;
         private Vector3[] _verticesArray;
-        
+
         public float Mass
         {
             get => mass;
@@ -29,7 +31,7 @@ namespace Game.Gameplay
         private void Start()
         {
             _transform = transform;
-            
+
             _originalMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
             _cloneMesh = Instantiate(_originalMesh);
             GetComponentInChildren<MeshFilter>().sharedMesh = _cloneMesh;
@@ -42,6 +44,8 @@ namespace Game.Gameplay
 
         private void FixedUpdate()
         {
+            Debug.Log("1");
+            
             _verticesArray = _originalMesh.vertices;
 
             for (int i = 0; i < _jellyVertices.Length; i++)
@@ -49,7 +53,7 @@ namespace Game.Gameplay
                 Vector3 target = _transform.TransformPoint(_verticesArray[_jellyVertices[i].ID]);
                 
                 Bounds bounds = _meshRenderer.bounds;
-                float intensityNow = (1 - (bounds.max.y - target.y) / bounds.size.y) * this.intensity;
+                float intensityNow = (1 - (bounds.max.y - target.y) / bounds.size.y) * intensity;
                 _jellyVertices[i].Shake(target, mass, stiffness, damping);
                 target = _transform.InverseTransformPoint(_jellyVertices[i].Position);
                 _verticesArray[_jellyVertices[i].ID] =
@@ -61,15 +65,15 @@ namespace Game.Gameplay
 
         public void Reset()
         {
-            StartCoroutine(nameof(ResetCoroutine));
-        }
-
-        private IEnumerator ResetCoroutine()
-        {
-            float intensityNow = intensity;
-            intensity = 1f;
-            yield return new WaitForSeconds(1f);
-            intensity = intensityNow;
+            _verticesArray = _originalMesh.vertices;
+            
+            for (int i = 0; i < _jellyVertices.Length; i++)
+            {
+                Vector3 target = _transform.TransformPoint(_verticesArray[_jellyVertices[i].ID]);
+                _jellyVertices[i].Reset(target);
+            }
+            
+            _cloneMesh.vertices = _verticesArray;
         }
     }
 }

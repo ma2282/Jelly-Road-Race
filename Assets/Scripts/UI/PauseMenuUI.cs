@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,15 +14,17 @@ namespace Game.Gameplay
 
         private float _timeScaleBackup;
 
-        public bool IsPaused { get; private set; }
-
-        public void Initialize()
+        private void Start()
         {
             pauseButton.onClick.AddListener(PauseGame);
             resumeButton.onClick.AddListener(ResumeGame);
             homeButton.onClick.AddListener(StopGame);
-            
-            IsPaused = false;
+            gameObject.SetActive(false);
+        }
+
+        public void Initialize()
+        {
+            GameManager.Instance.IsPaused = false;
 
             Time.timeScale = 1f;
             
@@ -36,9 +39,9 @@ namespace Game.Gameplay
         public void PauseGame()
         {
             _timeScaleBackup = Time.timeScale;
-            Time.timeScale = 0;
+            Time.timeScale = 0f;
             
-            IsPaused = true;
+            GameManager.Instance.IsPaused = true;
             
             gameObject.SetActive(true);
         }
@@ -47,7 +50,7 @@ namespace Game.Gameplay
         {
             Time.timeScale = _timeScaleBackup;
 
-            IsPaused = false;
+            GameManager.Instance.IsPaused = false;
             
             gameObject.SetActive(false);
         }

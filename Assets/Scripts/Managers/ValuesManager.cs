@@ -44,5 +44,12 @@ namespace Game.Gameplay
 
             SaveLoadSystem.SaveData(data);
         }
+
+        public void ResetScore()
+        {
+            _scoreNow = 0;
+
+            UIManager.Instance.ChangeScore(_scoreNow);
+        }
     }
 }
