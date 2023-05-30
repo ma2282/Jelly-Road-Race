@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using NTC.Global.System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Gameplay
 {
@@ -14,20 +13,39 @@ namespace Game.Gameplay
 
         [SerializeField] private Player player;
 
-        [SerializeField] private GameObject[] gameplayGameObjects;
-        [SerializeField] private GameObject[] homeGameObjects;
-        [SerializeField] private GameObject[] gameOverGameObjects;
-
+        private bool _isPaused = true;
+        private float _timeBackup;
+        
         private CoroutineObject _addingScoreCoroutine;
 
-        public bool IsPaused { get; set; } = true;
-        
+        public bool IsPaused
+        {
+            get => _isPaused;
+            set
+            {
+                _isPaused = value;
+                if (_isPaused)
+                {
+                    _timeBackup = Time.timeScale != 0f ? Time.timeScale : _timeBackup;
+                    Time.timeScale = 0f;
+                }
+                else
+                    Time.timeScale = _timeBackup != 0f ? _timeBackup : Time.timeScale;
+            }
+        }
+
+        public GameState GameState
+        {
+            set => ChangeGameState(value);
+        }
+
         public Player Player => player;
 
         private void Start()
         {
             _addingScoreCoroutine = new CoroutineObject(this, AddingScore);
-            player.OnKilled.AddListener(FinishGame);
+            
+            player.OnKilled.AddListener(() => GameState = GameState.Finished);
         }
 
         private IEnumerator AddingScore()
@@ -37,20 +55,6 @@ namespace Game.Gameplay
                 ValuesManager.Instance.AddScore(1);
                 yield return new WaitForSeconds(1f);
             }
-        }
-
-        private void FinishGame()
-        {
-            foreach (GameObject obj in homeGameObjects)
-                obj.SetActive(false);
-            
-            foreach (GameObject obj in gameplayGameObjects)
-                obj.SetActive(false);
-            
-            foreach (GameObject obj in gameOverGameObjects)
-                obj.SetActive(true);
-            
-            InitializeHome();
         }
 
         public void ChangeTimeScale(float verticalMovement)
@@ -68,12 +72,11 @@ namespace Game.Gameplay
 
         private void InitializeGameplay()
         {
-            Time.timeScale = 1f;
             ChunkManager.Instance.StartMoving();
             _addingScoreCoroutine.Start();
-            UIManager.Instance.StartGame();
+            IsPaused = false;
         }
-        
+
         private void InitializeHome()
         {
             player.Reset();
@@ -82,33 +85,34 @@ namespace Game.Gameplay
             ValuesManager.Instance.Save();
             ValuesManager.Instance.ResetScore();
         }
-        
-        public void StopGame()
-        {
-            foreach (GameObject obj in gameplayGameObjects)
-                obj.SetActive(false);
-            
-            foreach (GameObject obj in gameOverGameObjects)
-                obj.SetActive(false);
-            
-            foreach (GameObject obj in homeGameObjects)
-                obj.SetActive(true);
 
-            InitializeHome();
+        private void SetActiveGameObjects(GameObject[] gameObjects, bool value)
+        {
+            foreach (GameObject obj in gameObjects)
+                obj.SetActive(value);
         }
-        
-        public void StartGame()
-        {
-            foreach (GameObject obj in homeGameObjects)
-                obj.SetActive(false);
-            
-            foreach (GameObject obj in gameOverGameObjects)
-                obj.SetActive(false);
-            
-            foreach (GameObject obj in gameplayGameObjects)
-                obj.SetActive(true);
 
-            InitializeGameplay();
+        private void ChangeGameState(GameState gameState)
+        {
+            UIManager.Instance.ShowUI(gameState);
+
+            switch (gameState)
+            {
+                case GameState.Started:
+                    InitializeGameplay();
+                    break;
+                case GameState.Finished:
+                case GameState.Stopped:
+                    InitializeHome();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
+            }
+        }
+
+        public void ExitGame()
+        {
+            Application.Quit();
         }
     }
 }

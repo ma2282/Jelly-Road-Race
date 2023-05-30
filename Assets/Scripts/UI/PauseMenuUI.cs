@@ -14,33 +14,20 @@ namespace Game.Gameplay
 
         private float _timeScaleBackup;
 
-        private void Start()
+        public void Initialize()
         {
             pauseButton.onClick.AddListener(PauseGame);
             resumeButton.onClick.AddListener(ResumeGame);
             homeButton.onClick.AddListener(StopGame);
-            gameObject.SetActive(false);
-        }
-
-        public void Initialize()
-        {
-            GameManager.Instance.IsPaused = false;
-
-            Time.timeScale = 1f;
-            
-            gameObject.SetActive(false);
         }
 
         private void StopGame()
         {
-            GameManager.Instance.StopGame();
+            GameManager.Instance.GameState = GameState.Stopped;
         }
         
         public void PauseGame()
         {
-            _timeScaleBackup = Time.timeScale;
-            Time.timeScale = 0f;
-            
             GameManager.Instance.IsPaused = true;
             
             gameObject.SetActive(true);
@@ -48,8 +35,6 @@ namespace Game.Gameplay
 
         public void ResumeGame()
         {
-            Time.timeScale = _timeScaleBackup;
-
             GameManager.Instance.IsPaused = false;
             
             gameObject.SetActive(false);

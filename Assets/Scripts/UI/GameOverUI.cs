@@ -8,14 +8,14 @@ namespace Game.Gameplay
     {
         [SerializeField] private Button restartButton;
 
-        private void Start()
+        public void Initialize()
         {
             restartButton.onClick.AddListener(RestartGame);
         }
 
         private void RestartGame()
         {
-            GameManager.Instance.StartGame();
+            GameManager.Instance.GameState = GameState.Started;
         }
     }
 }

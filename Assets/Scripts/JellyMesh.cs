@@ -44,8 +44,6 @@ namespace Game.Gameplay
 
         private void FixedUpdate()
         {
-            Debug.Log("1");
-            
             _verticesArray = _originalMesh.vertices;
 
             for (int i = 0; i < _jellyVertices.Length; i++)

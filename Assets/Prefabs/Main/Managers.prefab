@@ -48,6 +48,7 @@ MonoBehaviour:
   gameplayUI: {fileID: 0}
   pauseMenuUI: {fileID: 0}
   gameOverUI: {fileID: 0}
+  settingsUI: {fileID: 0}
 --- !u!1 &1189610013030797484
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,13 +134,6 @@ MonoBehaviour:
   minTimeScale: 0.7
   timeScaleStep: 0.2
   player: {fileID: 0}
-  gameplayGameObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  homeGameObjects:
-  - {fileID: 0}
-  gameOverGameObjects:
-  - {fileID: 0}
 --- !u!1 &1189610013536542176
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,8 +420,8 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.64999926
-        value: 0.49882126
+        time: 0.7
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0

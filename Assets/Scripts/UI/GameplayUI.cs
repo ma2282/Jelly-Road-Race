@@ -11,6 +11,9 @@ namespace Game.Gameplay
         private int _score;
         private int _coins;
 
+        public void Initialize()
+        {}
+
         public void ChangeCoins(int coins)
         {
             _coins = coins;
