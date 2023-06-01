@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game.Gameplay
 {
@@ -12,30 +8,22 @@ namespace Game.Gameplay
         [SerializeField] private float mass = 1f;
         [SerializeField] private float stiffness = 1f;
         [SerializeField] private float damping = 0.75f;
-
+        [SerializeField] private MeshFilter meshFilter;
+        [SerializeField] private MeshRenderer meshRenderer;
+        
         private Transform _transform;
         private Mesh _originalMesh, _cloneMesh;
-        private MeshRenderer _meshRenderer;
 
-        private CoroutineObject _resetCoroutine;
-        
-        private JellyVertex[] _jellyVertices;
         private Vector3[] _verticesArray;
-
-        public float Mass
-        {
-            get => mass;
-            set => mass = value;
-        }
+        private JellyVertex[] _jellyVertices;
 
         private void Start()
         {
             _transform = transform;
 
-            _originalMesh = GetComponentInChildren<MeshFilter>().sharedMesh;
+            _originalMesh = meshFilter.sharedMesh;
             _cloneMesh = Instantiate(_originalMesh);
-            GetComponentInChildren<MeshFilter>().sharedMesh = _cloneMesh;
-            _meshRenderer = GetComponentInChildren<MeshRenderer>();
+            meshFilter.sharedMesh = _cloneMesh;
 
             _jellyVertices = new JellyVertex[_cloneMesh.vertices.Length];
             for (int i = 0; i < _cloneMesh.vertices.Length; i++)
@@ -46,16 +34,16 @@ namespace Game.Gameplay
         {
             _verticesArray = _originalMesh.vertices;
 
-            for (int i = 0; i < _jellyVertices.Length; i++)
+            foreach (JellyVertex vertex in _jellyVertices)
             {
-                Vector3 target = _transform.TransformPoint(_verticesArray[_jellyVertices[i].ID]);
+                Vector3 target = _transform.TransformPoint(_verticesArray[vertex.ID]);
                 
-                Bounds bounds = _meshRenderer.bounds;
+                Bounds bounds = meshRenderer.bounds;
                 float intensityNow = (1 - (bounds.max.y - target.y) / bounds.size.y) * intensity;
-                _jellyVertices[i].Shake(target, mass, stiffness, damping);
-                target = _transform.InverseTransformPoint(_jellyVertices[i].Position);
-                _verticesArray[_jellyVertices[i].ID] =
-                    Vector3.Lerp(_verticesArray[_jellyVertices[i].ID], target, intensityNow);
+                vertex.Shake(target, mass, stiffness, damping);
+                target = _transform.InverseTransformPoint(vertex.Position);
+                _verticesArray[vertex.ID] =
+                    Vector3.Lerp(_verticesArray[vertex.ID], target, intensityNow);
             }
 
             _cloneMesh.vertices = _verticesArray;
@@ -65,10 +53,10 @@ namespace Game.Gameplay
         {
             _verticesArray = _originalMesh.vertices;
             
-            for (int i = 0; i < _jellyVertices.Length; i++)
+            foreach (JellyVertex vertex in _jellyVertices)
             {
-                Vector3 target = _transform.TransformPoint(_verticesArray[_jellyVertices[i].ID]);
-                _jellyVertices[i].Reset(target);
+                Vector3 target = _transform.TransformPoint(_verticesArray[vertex.ID]);
+                vertex.Reset(target);
             }
             
             _cloneMesh.vertices = _verticesArray;

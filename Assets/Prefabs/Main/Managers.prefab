@@ -134,7 +134,7 @@ MonoBehaviour:
   maxTimeScale: 2
   minTimeScale: 0.7
   timeScaleStep: 0.2
-  player: {fileID: 0}
+  mainPlayer: {fileID: 0}
 --- !u!1 &1189610013536542176
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e463e0f8b844688f03c49417b8d7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMovementController: {fileID: 0}
+  mainColorsInventory: {fileID: 0}
 --- !u!1 &2214692023550177522
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097c6d6e0c294db1b44b256c4117da0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scoreRate: 1
 --- !u!1001 &8229238888534232822
 PrefabInstance:
   m_ObjectHideFlags: 0

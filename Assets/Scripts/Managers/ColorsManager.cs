@@ -12,6 +12,7 @@ namespace Game.Gameplay
         [SerializeField] private Image fogImage;
         [SerializeField] private Renderer[] mainRenderers;
         [SerializeField] private PostProcessProfile _postProcessProfile;
+        [SerializeField] private ColorsInventory _mainColorsInventory;
         
         private ColorGrading _colorGrading;
 
@@ -21,6 +22,7 @@ namespace Game.Gameplay
         {
             _colorGrading = _postProcessProfile.settings.Find(x => x is ColorGrading) as ColorGrading;
             ResetColors();
+            _mainColorsInventory.OnColorChanged.AddListener(ChangeColor);
         }
 
         public void ChangeColor(GameColor color)

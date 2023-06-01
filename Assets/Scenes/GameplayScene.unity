@@ -150,6 +150,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b813ae79cf8d95949ac43a2dd34e618c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &781444167 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 781444167, guid: 12c565aa888ae194bad6b0d9b9de6e55, type: 3}
+  m_PrefabInstance: {fileID: 5151966388403410457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149c8241d3074c37a0d6457651260a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &781444171 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 781444171, guid: 12c565aa888ae194bad6b0d9b9de6e55, type: 3}
+  m_PrefabInstance: {fileID: 5151966388403410457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c68c6fb40cc4c86892e7447220792db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1018965719 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1584668578781034108, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
@@ -265,9 +287,17 @@ PrefabInstance:
       value: Managers
       objectReference: {fileID: 0}
     - target: {fileID: 1189610013195370110, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: player
+      propertyPath: mainPlayer
       value: 
       objectReference: {fileID: 558754895}
+    - target: {fileID: 1189610014931460507, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
+      propertyPath: mainColorsInventory
+      value: 
+      objectReference: {fileID: 781444167}
+    - target: {fileID: 1189610014931460507, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
+      propertyPath: mainMovementController
+      value: 
+      objectReference: {fileID: 781444171}
     - target: {fileID: 3112225400517396679, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
       propertyPath: startUI
       value: 
@@ -293,6 +323,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1657137162}
     - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
+      propertyPath: _mainColorsInventory
+      value: 
+      objectReference: {fileID: 781444167}
+    - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
       propertyPath: mainRenderers.Array.data[0]
       value: 
       objectReference: {fileID: 1160207443}
@@ -300,6 +334,10 @@ PrefabInstance:
       propertyPath: mainRenderers.Array.data[1]
       value: 
       objectReference: {fileID: 1468857637}
+    - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
+      propertyPath: possibleColors.Array.data[0].ColorAbility
+      value: 
+      objectReference: {fileID: 11400000, guid: b247601c017b9f241bdb0e12bc2c06e5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
 --- !u!1001 &1481977062090893207

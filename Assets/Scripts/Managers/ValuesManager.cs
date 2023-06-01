@@ -1,3 +1,4 @@
+using System.Collections;
 using NTC.Global.System;
 using UnityEngine;
 
@@ -5,10 +6,28 @@ namespace Game.Gameplay
 {
     public class ValuesManager : Singleton<ValuesManager>
     {
+        [SerializeField] private int _scoreRate = 1;
+        
         private int _coins;
         private int _scoreNow;
         private int _recordScore;
 
+        private CoroutineObject _addingScoreCoroutine;
+        
+        private void Start()
+        {
+            _addingScoreCoroutine = new CoroutineObject(this, AddingScoreCoroutine);
+        }
+
+        private IEnumerator AddingScoreCoroutine()
+        {
+            while (true)
+            {
+                AddScore(_scoreRate);
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        
         public void AddCoins(int coins)
         {
             _coins += coins;
@@ -50,6 +69,16 @@ namespace Game.Gameplay
             _scoreNow = 0;
 
             UIManager.Instance.ChangeScore(_scoreNow);
+        }
+
+        public void StartScore()
+        {
+            _addingScoreCoroutine.Start();
+        }
+
+        public void StopScore()
+        {
+            _addingScoreCoroutine.Stop();
         }
     }
 }

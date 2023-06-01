@@ -6,6 +6,9 @@ namespace Game.Gameplay
 {
     public class InputManager : Singleton<InputManager>
     {
+        [SerializeField] private MovementController mainMovementController;
+        [SerializeField] private ColorsInventory mainColorsInventory;
+        
         private float _horizontalMovement;
         private float _verticalMovement;
         
@@ -17,16 +20,16 @@ namespace Game.Gameplay
                 _verticalMovement = (Input.GetKeyDown(KeyCode.W) ? 1f : 0f) + (Input.GetKeyDown(KeyCode.S) ? -1f : 0f);
             
                 if (_horizontalMovement != 0f)
-                    GameManager.Instance.Player.Move(_horizontalMovement);
+                    mainMovementController.Move(_horizontalMovement);
 
                 if (_verticalMovement != 0f)
                     GameManager.Instance.ChangeTimeScale(_verticalMovement);
 
                 if (Input.GetKeyDown(KeyCode.Q))
-                    GameManager.Instance.Player.ShiftColor(-1);
+                    mainColorsInventory.ShiftColor(-1);
                 
                 if (Input.GetKeyDown(KeyCode.E))
-                    GameManager.Instance.Player.ShiftColor(1);
+                    mainColorsInventory.ShiftColor(1);
             }
         }
     }

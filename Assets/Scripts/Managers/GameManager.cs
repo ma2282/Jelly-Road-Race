@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using NTC.Global.System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Gameplay
 {
@@ -11,13 +12,12 @@ namespace Game.Gameplay
         [SerializeField] private float minTimeScale;
         [SerializeField] private float timeScaleStep;
 
-        [SerializeField] private Player player;
+        [SerializeField] private Player mainPlayer;
 
         private bool _isPaused = true;
         private float _timeBackup;
         
-        private CoroutineObject _addingScoreCoroutine;
-
+        
         public bool IsPaused
         {
             get => _isPaused;
@@ -36,25 +36,28 @@ namespace Game.Gameplay
 
         public GameState GameState
         {
-            set => ChangeGameState(value);
-        }
-
-        public Player Player => player;
-
-        private void Start()
-        {
-            _addingScoreCoroutine = new CoroutineObject(this, AddingScore);
-            
-            player.OnKilled.AddListener(() => GameState = GameState.Finished);
-        }
-
-        private IEnumerator AddingScore()
-        {
-            while (true)
+            set
             {
-                ValuesManager.Instance.AddScore(1);
-                yield return new WaitForSeconds(1f);
+                UIManager.Instance.ShowUI(value);
+
+                switch (value)
+                {
+                    case GameState.Started:
+                        InitializeGameplay();
+                        break;
+                    case GameState.Finished:
+                    case GameState.Stopped:
+                        InitializeHome();
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
+                }
             }
+        }
+
+        public void GameOver()
+        {
+            GameState = GameState.Finished;
         }
 
         public void ChangeTimeScale(float verticalMovement)
@@ -73,41 +76,17 @@ namespace Game.Gameplay
         private void InitializeGameplay()
         {
             ChunkManager.Instance.StartMoving();
-            _addingScoreCoroutine.Start();
+            ValuesManager.Instance.StartScore();
             IsPaused = false;
         }
 
         private void InitializeHome()
         {
-            player.Reset();
+            mainPlayer.Reset();
             ChunkManager.Instance.Reset();
-            _addingScoreCoroutine.Stop();
+            ValuesManager.Instance.StopScore();
             ValuesManager.Instance.Save();
             ValuesManager.Instance.ResetScore();
-        }
-
-        private void SetActiveGameObjects(GameObject[] gameObjects, bool value)
-        {
-            foreach (GameObject obj in gameObjects)
-                obj.SetActive(value);
-        }
-
-        private void ChangeGameState(GameState gameState)
-        {
-            UIManager.Instance.ShowUI(gameState);
-
-            switch (gameState)
-            {
-                case GameState.Started:
-                    InitializeGameplay();
-                    break;
-                case GameState.Finished:
-                case GameState.Stopped:
-                    InitializeHome();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null);
-            }
         }
 
         public void ExitGame()
