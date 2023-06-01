@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 1
   mass: 2
-  stiffness: 0.25
+  stiffness: 0.5
   damping: 0.95
   meshFilter: {fileID: 8017243659181081335}
   meshRenderer: {fileID: 5080853395747758977}
@@ -282,6 +282,7 @@ GameObject:
   - component: {fileID: 781444169}
   - component: {fileID: 781444170}
   - component: {fileID: 1126114389}
+  - component: {fileID: 8419726599872943034}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -353,6 +354,7 @@ MonoBehaviour:
   _trailHandler: {fileID: 781444168}
   _jellyMesh: {fileID: 8780982337313019625}
   _colorsInventory: {fileID: 781444167}
+  _jumpController: {fileID: 8419726599872943034}
 --- !u!114 &781444171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +392,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149c8241d3074c37a0d6457651260a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnColorChanged:
+    m_PersistentCalls:
+      m_Calls: []
   OnTakeNewColor:
     m_PersistentCalls:
       m_Calls: []
@@ -461,3 +466,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &8419726599872943034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9035185669278030515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd24c4b8fc6e4c969641db79964fa48a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementController: {fileID: 781444171}
+  OnJumpingStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnJumpingEnd:
+    m_PersistentCalls:
+      m_Calls: []

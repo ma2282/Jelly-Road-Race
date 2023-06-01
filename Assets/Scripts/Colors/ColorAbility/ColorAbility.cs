@@ -8,12 +8,12 @@ namespace Game.Gameplay
         
         protected GameObject _ownerGameObject;
 
-        public virtual void ActivateAbility(GameObject owner)
+        public virtual void ActivateAbility(GameObject ownerObject)
         {
-            if (!owner.TryGetComponent(out IColorAbilityReceiver receiver)) return;
+            if (!ownerObject.TryGetComponent(out IColorAbilityReceiver receiver)) return;
 
             Owner = receiver;
-            _ownerGameObject = owner;
+            _ownerGameObject = ownerObject;
         }
 
         public virtual void DeactivateAbility()

@@ -44,9 +44,6 @@ namespace Game.Gameplay
 
         public void ShiftColor(int shift)
         {
-            if (shift == 0)
-                return;
-            
             int index = (_indexNow + shift) % _colors.Count;
             index = (index < 0) ? _colors.Count - 1 : index;
             
@@ -66,6 +63,19 @@ namespace Game.Gameplay
         public void Reset(IColorAbilityReceiver receiver)
         {
             Initialize(receiver);
+        }
+
+        public void UpdateColor()
+        {
+            ShiftColor(0);
+        }
+        
+        public void RemoveColorNow()
+        {
+            if (_indexNow == 0) return;
+            
+            _colors.RemoveAt(_indexNow);
+            UpdateColor();
         }
     }
 }

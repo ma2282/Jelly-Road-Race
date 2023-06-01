@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class Player : ObstacleReceiver, IColorAbilityReceiver
+    public class Player : MonoBehaviour, IObstacleReceiver, IColorAbilityReceiver
     {
         [SerializeField] private MovementController _movementController;
         [SerializeField] private AnimationsHandler _animationsHandler;
@@ -10,6 +10,7 @@ namespace Game.Gameplay
         [SerializeField] private TrailHandler _trailHandler;
         [SerializeField] private JellyMesh _jellyMesh;
         [SerializeField] private ColorsInventory _colorsInventory;
+        [SerializeField] private JumpController _jumpController;
 
         private ColorAbility _lastColorAbility;
 
@@ -20,6 +21,9 @@ namespace Game.Gameplay
             
             _movementController.OnMovingStart.AddListener(_trailHandler.DeactivateTrail);
             _movementController.OnMovingEnd.AddListener(_trailHandler.ActivateTrail);
+            
+            _jumpController.OnJumpingStart.AddListener(_trailHandler.DeactivateTrail);
+            _jumpController.OnJumpingEnd.AddListener(_trailHandler.ActivateTrail);
             
             _healthHandler.OnHeal.AddListener(_animationsHandler.TriggerHeal);
             _healthHandler.OnTakeDamage.AddListener(_animationsHandler.TriggerDamage);
@@ -38,7 +42,7 @@ namespace Game.Gameplay
             _jellyMesh.Reset();
         }
 
-        public override void ReceiveObstacle(IObstacle obstacle)
+        public void ReceiveObstacle(IObstacle obstacle)
         {
             if (obstacle is not HealingObstacle) return;
             

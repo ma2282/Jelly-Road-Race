@@ -16,7 +16,7 @@ namespace Game.Gameplay
             _renderer.material.color = obstacleColor.Color;
         }
 
-        public virtual void OnEnterObstacleReceiver(ObstacleReceiver receiver)
+        public virtual void OnEnterObstacleReceiver(GameObject receiverObject, IObstacleReceiver receiver)
         {
             receiver.ReceiveObstacle(this);
             Destroy(gameObject);
@@ -24,8 +24,8 @@ namespace Game.Gameplay
         
         protected virtual void OnTriggerEnter(Collider other)
         {
-            if (!other.TryGetComponent(out ObstacleReceiver receiver)) return;
-                OnEnterObstacleReceiver(receiver);
+            if (!other.TryGetComponent(out IObstacleReceiver receiver)) return;
+                OnEnterObstacleReceiver(other.gameObject, receiver);
         }
     }
 }

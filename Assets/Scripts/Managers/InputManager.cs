@@ -7,6 +7,7 @@ namespace Game.Gameplay
     public class InputManager : Singleton<InputManager>
     {
         [SerializeField] private MovementController mainMovementController;
+        [SerializeField] private JumpController mainJumpController;
         [SerializeField] private ColorsInventory mainColorsInventory;
         
         private float _horizontalMovement;
@@ -30,6 +31,9 @@ namespace Game.Gameplay
                 
                 if (Input.GetKeyDown(KeyCode.E))
                     mainColorsInventory.ShiftColor(1);
+
+                if (Input.GetKeyDown(KeyCode.Space) && mainJumpController.gameObject.activeInHierarchy)
+                    mainJumpController.Jump();
             }
         }
     }

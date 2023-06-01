@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Game.Gameplay
 {
     public interface IObstacle
@@ -6,6 +8,6 @@ namespace Game.Gameplay
 
         void ChangeColor(GameColor color);
         
-        void OnEnterObstacleReceiver(ObstacleReceiver receiver);
+        void OnEnterObstacleReceiver(GameObject receiverObject, IObstacleReceiver receiver);
     }
 }

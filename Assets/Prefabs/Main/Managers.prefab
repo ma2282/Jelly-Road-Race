@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMovementController: {fileID: 0}
+  mainJumpController: {fileID: 0}
   mainColorsInventory: {fileID: 0}
 --- !u!1 &2214692023550177522
 GameObject:
@@ -304,6 +305,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    ColorAbility: {fileID: 0}
   possibleColors:
   - Color: {r: 1, g: 0.07291311, b: 0, a: 1}
     HueVsSaturationCurve:
@@ -348,6 +350,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    ColorAbility: {fileID: 11400000, guid: b247601c017b9f241bdb0e12bc2c06e5, type: 2}
   - Color: {r: 1, g: 0.920817, b: 0, a: 1}
     HueVsSaturationCurve:
       serializedVersion: 2
@@ -400,6 +403,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    ColorAbility: {fileID: 11400000, guid: 564a016c65bb94e4f9492102477f8048, type: 2}
   - Color: {r: 0.12519169, g: 0, b: 1, a: 1}
     HueVsSaturationCurve:
       serializedVersion: 2
@@ -461,11 +465,13 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    ColorAbility: {fileID: 0}
   fogImage: {fileID: 0}
   mainRenderers:
   - {fileID: 0}
   - {fileID: 0}
   _postProcessProfile: {fileID: 11400000, guid: e6c030c777613b54da50d5736a81b150, type: 2}
+  _mainColorsInventory: {fileID: 0}
 --- !u!1 &5143913563416512929
 GameObject:
   m_ObjectHideFlags: 0

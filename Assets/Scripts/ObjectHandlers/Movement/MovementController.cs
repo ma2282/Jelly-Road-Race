@@ -13,6 +13,8 @@ namespace Game.Gameplay
 
         protected const float DISTANCE_EPSILON = 0.1f;
 
+        protected bool _isEnabled = true;
+        
         protected int _previousPositionIndex;
         protected int _positionIndex;
 
@@ -22,10 +24,12 @@ namespace Game.Gameplay
         protected Transform _ownerTransform;
         protected CoroutineObject _moveCoroutine;
 
+        public bool CanJump { get; set; }
+        
         public float SpeedRate { get; set; } = 1f;
 
         public float MoveSpeed => moveSpeed;
-        
+
         public UnityEvent OnMovingStart;
         public UnityEvent OnMovingEnd;
 
@@ -39,7 +43,7 @@ namespace Game.Gameplay
 
         public void Move(float horizontalMovement)
         {
-            if (_moveCoroutine.IsProcessing) return;
+            if (!_isEnabled || _moveCoroutine.IsProcessing) return;
 
             if (_positionIndex == 0 && horizontalMovement < 0 ||
                 _positionIndex == allPositions.Length - 1 && horizontalMovement > 0)
@@ -98,5 +102,9 @@ namespace Game.Gameplay
             moveSpeed = defaultMoveSpeed;
             SpeedRate = 1f;
         }
+
+        public void Deactivate() => _isEnabled = false;
+        
+        public void Activate() => _isEnabled = true;
     }
 }

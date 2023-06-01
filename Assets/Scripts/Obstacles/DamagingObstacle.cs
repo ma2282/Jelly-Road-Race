@@ -6,11 +6,13 @@ namespace Game.Gameplay
     {
         [SerializeField] protected float healthPoints;
         
-        public override void OnEnterObstacleReceiver(ObstacleReceiver receiver)
+        public override void OnEnterObstacleReceiver(GameObject receiverObject, IObstacleReceiver receiver)
         {
-            if (receiver.TryGetComponent(out HealthHandler healthHandler))
+            if (receiverObject.TryGetComponent(out HealthHandler healthHandler))
                 TakeDamage(healthHandler);
-            base.OnEnterObstacleReceiver(receiver);
+            if (receiverObject.TryGetComponent(out ColorsInventory colorsInventory))
+                colorsInventory.RemoveColorNow();
+            base.OnEnterObstacleReceiver(receiverObject, receiver);
         }
 
         protected virtual void TakeDamage(HealthHandler healthHandler)
