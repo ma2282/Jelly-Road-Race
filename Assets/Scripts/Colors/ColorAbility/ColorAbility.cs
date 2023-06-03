@@ -18,7 +18,10 @@ namespace Game.Gameplay
 
         public virtual void DeactivateAbility()
         {
-            
+        }
+
+        public virtual void RestoreDefaults()
+        {
         }
     }
 }

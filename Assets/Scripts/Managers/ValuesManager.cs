@@ -1,33 +1,52 @@
 using System.Collections;
 using NTC.Global.System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.Gameplay
 {
     public class ValuesManager : Singleton<ValuesManager>
     {
-        [SerializeField] private int _scoreRate = 1;
+        [SerializeField] private int scoreRate = 1;
+        [SerializeField] private float timeRate = 0.5f;
+        [SerializeField] private float maxTimeScale = 2f;
         
         private int _coins;
         private int _scoreNow;
         private int _recordScore;
 
         private CoroutineObject _addingScoreCoroutine;
+        private CoroutineObject _addingTimeScaleCoroutine;
         
         private void Start()
         {
             _addingScoreCoroutine = new CoroutineObject(this, AddingScoreCoroutine);
+            _addingTimeScaleCoroutine = new CoroutineObject(this, AddingTimeScaleCoroutine);
         }
 
         private IEnumerator AddingScoreCoroutine()
         {
             while (true)
             {
-                AddScore(_scoreRate);
+                AddScore(scoreRate);
                 yield return new WaitForSeconds(1f);
             }
         }
-        
+
+        private IEnumerator AddingTimeScaleCoroutine()
+        {
+            while (true)
+            {
+                AddTimeScale();
+                yield return new WaitForSeconds(1f);
+            }
+        }
+
+        private void AddTimeScale()
+        {
+            Time.timeScale = Mathf.Min(maxTimeScale, Time.timeScale + timeRate / Time.timeScale);
+        }
+
         public void AddCoins(int coins)
         {
             _coins += coins;
@@ -64,9 +83,11 @@ namespace Game.Gameplay
             SaveLoadSystem.SaveData(data);
         }
 
-        public void ResetScore()
+        public void RestoreDefaults()
         {
             _scoreNow = 0;
+
+            Time.timeScale = 1f;
 
             UIManager.Instance.ChangeScore(_scoreNow);
         }
@@ -74,11 +95,13 @@ namespace Game.Gameplay
         public void StartScore()
         {
             _addingScoreCoroutine.Start();
+            _addingTimeScaleCoroutine.Start();
         }
 
         public void StopScore()
         {
             _addingScoreCoroutine.Stop();
+            _addingTimeScaleCoroutine.Stop();
         }
     }
 }

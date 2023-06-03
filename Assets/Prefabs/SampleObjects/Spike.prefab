@@ -137,5 +137,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+    ColorAbility: {fileID: 0}
   _renderer: {fileID: 2436094423973341257}
   healthPoints: 1

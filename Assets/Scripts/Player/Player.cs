@@ -44,7 +44,7 @@ namespace Game.Gameplay
 
         public void ReceiveObstacle(IObstacle obstacle)
         {
-            if (obstacle is not HealingObstacle) return;
+            if (obstacle is not ObstacleWithColor) return;
             
             _colorsInventory.AddColor(obstacle.Color);
             ValuesManager.Instance.AddCoins(1);
@@ -54,9 +54,14 @@ namespace Game.Gameplay
         {
             if (_lastColorAbility != null)
                 _lastColorAbility.DeactivateAbility();
-            
+
             if (ability != null)
+            {
                 ability.ActivateAbility(gameObject);
+                
+                if (_lastColorAbility == ability)
+                    ability.RestoreDefaults();
+            }
 
             _lastColorAbility = ability;
         }

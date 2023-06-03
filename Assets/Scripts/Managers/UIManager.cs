@@ -12,7 +12,8 @@ namespace Game.Gameplay
         [SerializeField] private PauseMenuUI pauseMenuUI;
         [SerializeField] private GameOverUI gameOverUI;
         [SerializeField] private SettingsUI settingsUI;
-
+        [SerializeField] private ShopUI shopUI;
+            
         private List<GameObject> _UIs;
         
         private void Start()
@@ -22,6 +23,7 @@ namespace Game.Gameplay
             pauseMenuUI.Initialize();
             gameOverUI.Initialize();
             settingsUI.Initialize();
+            shopUI.Initialize();
 
             _UIs = new List<GameObject>
             {
@@ -29,7 +31,8 @@ namespace Game.Gameplay
                 gameplayUI.gameObject,
                 pauseMenuUI.gameObject,
                 gameOverUI.gameObject,
-                settingsUI.gameObject
+                settingsUI.gameObject,
+                shopUI.gameObject
             };
         }
 
@@ -50,6 +53,11 @@ namespace Game.Gameplay
         public void ShowSettings()
         {
             settingsUI.gameObject.SetActive(true);
+        }
+        
+        public void ShowShop()
+        {
+            shopUI.gameObject.SetActive(true);
         }
 
         public void ChangeCoins(int coins) => gameplayUI.ChangeCoins(coins);

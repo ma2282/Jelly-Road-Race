@@ -24,13 +24,7 @@ namespace Game.Gameplay
                     mainMovementController.Move(_horizontalMovement);
 
                 if (_verticalMovement != 0f)
-                    GameManager.Instance.ChangeTimeScale(_verticalMovement);
-
-                if (Input.GetKeyDown(KeyCode.Q))
-                    mainColorsInventory.ShiftColor(-1);
-                
-                if (Input.GetKeyDown(KeyCode.E))
-                    mainColorsInventory.ShiftColor(1);
+                    mainColorsInventory.ShiftColor((int)_verticalMovement);
 
                 if (Input.GetKeyDown(KeyCode.Space) && mainJumpController.gameObject.activeInHierarchy)
                     mainJumpController.Jump();

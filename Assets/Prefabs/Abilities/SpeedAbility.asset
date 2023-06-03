@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b886084ac28430f8b32ecf688b731ef, type: 3}
   m_Name: SpeedAbility
   m_EditorClassIdentifier: 
-  _speedRate: 1
-  _timeSpeedRate: 2
+  speedRate: 1
+  timeSpeedRate: 2

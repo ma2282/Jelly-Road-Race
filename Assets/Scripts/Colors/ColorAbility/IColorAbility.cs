@@ -7,5 +7,6 @@ namespace Game.Gameplay
         IColorAbilityReceiver Owner { get; }
         void ActivateAbility(GameObject ownerObject);
         void DeactivateAbility();
+        void RestoreDefaults();
     }
 }

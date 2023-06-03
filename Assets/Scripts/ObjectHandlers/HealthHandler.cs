@@ -9,6 +9,8 @@ namespace Game.Gameplay
         [SerializeField] private float defaultHealth = 1f;
         [SerializeField] private float health = 1f;
 
+        private int _defense;
+
         public UnityEvent OnHeal;
         public UnityEvent OnTakeDamage;
         public UnityEvent OnKilled;
@@ -24,14 +26,19 @@ namespace Game.Gameplay
                     health = value;
             }
         }
-        
+
+        public int Defense => _defense;
+
         public void TakeDamage(float damage)
         {
             if (damage < 0f)
                 throw new ArgumentException("Damage less than zero");
 
-            Health -= damage;
-            
+            if (_defense > 0 && damage > 0f)
+                _defense--;
+            else
+                Health -= damage;
+
             OnTakeDamage?.Invoke();
         }
 
@@ -54,6 +61,17 @@ namespace Game.Gameplay
         public void Reset()
         {
             health = defaultHealth;
+        }
+
+        public void RestoreDefense(int defensePoints)
+        {
+            _defense = defensePoints;
+        }
+
+        public void RemoveDefense(out int defensePointsLeft)
+        {
+            defensePointsLeft = _defense;
+            _defense = 0;
         }
     }
 }

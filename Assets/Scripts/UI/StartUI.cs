@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +8,14 @@ namespace Game.Gameplay
         [SerializeField] private Button playButton;
         [SerializeField] private Button settingsButton;
         [SerializeField] private Button exitButton;
+        [SerializeField] private Button shopButton;
 
         public void Initialize()
         {
             playButton.onClick.AddListener(StartGame);
             settingsButton.onClick.AddListener(ShowSettings);
             exitButton.onClick.AddListener(ExitGame);
+            shopButton.onClick.AddListener(ShowShop);
         }
 
         private void StartGame()
@@ -26,6 +26,11 @@ namespace Game.Gameplay
         private void ShowSettings()
         {
             UIManager.Instance.ShowSettings();
+        }
+
+        private void ShowShop()
+        {
+            UIManager.Instance.ShowShop();
         }
 
         private void ExitGame()

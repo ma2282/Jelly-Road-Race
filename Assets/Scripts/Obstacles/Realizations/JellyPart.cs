@@ -1,6 +1,6 @@
 namespace Game.Gameplay
 {
-    public class JellyPart : HealingObstacle
+    public class JellyPart : ObstacleWithColor
     {
         private void Start()
         {

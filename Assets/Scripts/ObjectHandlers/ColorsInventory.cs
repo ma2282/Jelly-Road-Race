@@ -20,6 +20,7 @@ namespace Game.Gameplay
             _indexNow = 0;
             _colors = new List<GameColor>(4) { ColorsManager.Instance.DefaultColor };
             _colorAbilityReceiver = receiver;
+            ChangeIndex(0);
         }
 
         public void AddColor(GameColor color)

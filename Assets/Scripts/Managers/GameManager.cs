@@ -8,10 +8,6 @@ namespace Game.Gameplay
 {
     public class GameManager : Singleton<GameManager>
     {
-        [SerializeField] private float maxTimeScale;
-        [SerializeField] private float minTimeScale;
-        [SerializeField] private float timeScaleStep;
-
         [SerializeField] private Player mainPlayer;
 
         private bool _isPaused = true;
@@ -60,13 +56,6 @@ namespace Game.Gameplay
             GameState = GameState.Finished;
         }
 
-        public void ChangeTimeScale(float verticalMovement)
-        {
-            Time.timeScale = verticalMovement < 0f
-                ? Mathf.Max(Time.timeScale - timeScaleStep, minTimeScale)
-                : Mathf.Min(Time.timeScale + timeScaleStep, maxTimeScale);
-        }
-
         private void OnApplicationQuit()
         {
             ValuesManager.Instance.Save();
@@ -86,7 +75,7 @@ namespace Game.Gameplay
             ChunkManager.Instance.Reset();
             ValuesManager.Instance.StopScore();
             ValuesManager.Instance.Save();
-            ValuesManager.Instance.ResetScore();
+            ValuesManager.Instance.RestoreDefaults();
         }
 
         public void ExitGame()

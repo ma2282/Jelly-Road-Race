@@ -49,6 +49,7 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 0}
   gameOverUI: {fileID: 0}
   settingsUI: {fileID: 0}
+  shopUI: {fileID: 0}
 --- !u!1 &1189610013030797484
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,9 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7125a70880746ec94492eb9e2e31a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTimeScale: 2
-  minTimeScale: 0.7
-  timeScaleStep: 0.2
   mainPlayer: {fileID: 0}
 --- !u!1 &1189610013536542176
 GameObject:
@@ -185,9 +183,21 @@ MonoBehaviour:
   chunks:
   - {fileID: 1189610014395949824}
   chunkPartSamples:
-  - {fileID: 6039255656771910218, guid: ef96df55124c04542af33182b6a86954, type: 3}
   - {fileID: 6039255656771910218, guid: e38fb5a46aa0ddc48ac6a282e50c27bc, type: 3}
-  - {fileID: 6039255656771910218, guid: a33f184c567f0274393e74176cf3dbd1, type: 3}
+  - {fileID: 6039255656771910218, guid: 87737689055c96a4581669bb893920fd, type: 3}
+  - {fileID: 6039255656771910218, guid: 7d25ebccf6f7b3e4ab5dbfd81012cb46, type: 3}
+  - {fileID: 6039255656771910218, guid: df48f753fa58a074e92fd058b923aff9, type: 3}
+  - {fileID: 6039255656771910218, guid: 18460cca2f9993b4da63837cd5adb231, type: 3}
+  - {fileID: 6039255656771910218, guid: 3dd49383d8faa654283665f08bd7fac4, type: 3}
+  - {fileID: 6039255656771910218, guid: e4ba4e2257262e846b6435f845fc9432, type: 3}
+  - {fileID: 6039255656771910218, guid: 38b1d912d9659004da2a667cbb3f7d1e, type: 3}
+  - {fileID: 6039255656771910218, guid: 9a4a827e9d4909446a10ff17dd58b183, type: 3}
+  - {fileID: 6039255656771910218, guid: 33ae404921f016742a9322e2e70a2e52, type: 3}
+  - {fileID: 6039255656771910218, guid: d5e8fa14c7163e841b6edee4af9faa71, type: 3}
+  - {fileID: 6039255656771910218, guid: 4d77565dae04f6e438b509e97793ccd1, type: 3}
+  - {fileID: 6039255656771910218, guid: eafa66b4de819184291dbb9efa13d3a0, type: 3}
+  - {fileID: 6039255656771910218, guid: 861776ab8613deb4686e22556e86212c, type: 3}
+  - {fileID: 6039255656771910218, guid: ef96df55124c04542af33182b6a86954, type: 3}
 --- !u!1 &1189610014931460509
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +475,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ColorAbility: {fileID: 0}
+    ColorAbility: {fileID: 11400000, guid: 11b09167d5416414cac9123a88543657, type: 2}
   fogImage: {fileID: 0}
   mainRenderers:
   - {fileID: 0}
@@ -560,7 +570,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 097c6d6e0c294db1b44b256c4117da0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreRate: 1
+  scoreRate: 1
+  timeRate: 0.05
+  maxTimeScale: 10
 --- !u!1001 &8229238888534232822
 PrefabInstance:
   m_ObjectHideFlags: 0
