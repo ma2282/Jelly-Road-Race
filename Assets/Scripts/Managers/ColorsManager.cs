@@ -10,9 +10,11 @@ namespace Game.Gameplay
         [SerializeField] private GameColor defaultColor;
         [SerializeField] private GameColor[] possibleColors;
         [SerializeField] private Image fogImage;
+        [SerializeField] private Renderer playerRenderer;
         [SerializeField] private Renderer[] mainRenderers;
         [SerializeField] private PostProcessProfile _postProcessProfile;
         [SerializeField] private ColorsInventory _mainColorsInventory;
+        [SerializeField] private SkinHandler _skinHandler;
         
         private ColorGrading _colorGrading;
 
@@ -23,6 +25,7 @@ namespace Game.Gameplay
             _colorGrading = _postProcessProfile.settings.Find(x => x is ColorGrading) as ColorGrading;
             ResetColors();
             _mainColorsInventory.OnColorChanged.AddListener(ChangeColor);
+            _skinHandler.OnSkinChanged.AddListener(ChangePlayerRenderer);
         }
 
         public void ChangeColor(GameColor color)
@@ -30,14 +33,16 @@ namespace Game.Gameplay
             foreach (Renderer mainRenderer in mainRenderers)
             {
                 Material material = mainRenderer.material;
-
-                Color resultColor = color.Color;
                 
-                if (mainRenderer.gameObject.GetComponentInParent<Player>() != null)
-                    resultColor.a = material.color.a;
-                
-                material.color = resultColor;
+                material.color = color.Color;
             }
+
+            Material playerMaterial = playerRenderer.material;
+            
+            Color resultColor = color.Color;
+            resultColor.a = playerMaterial.color.a;
+            playerMaterial.color = resultColor;
+
             Color fogColor = color.Color;
             fogColor.a = fogImage.color.a;
             
@@ -54,6 +59,11 @@ namespace Game.Gameplay
         public GameColor GetRandomColor()
         {
             return possibleColors[Random.Range(0, possibleColors.Length)];
+        }
+
+        public void ChangePlayerRenderer(Skin skin)
+        {
+            playerRenderer = skin.SkinObject.GetComponent<Renderer>();
         }
     }
 }

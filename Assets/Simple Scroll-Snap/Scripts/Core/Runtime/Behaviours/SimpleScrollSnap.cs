@@ -610,7 +610,7 @@ namespace DanielLochner.Assets.SimpleScrollSnap
         {
             CenteredPanel = panelNumber;
             isSelected = true;
-            onPanelSelected.Invoke(SelectedPanel);
+            onPanelSelected.Invoke(panelNumber);
 
             if (pagination != null)
             {

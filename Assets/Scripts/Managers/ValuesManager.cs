@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using NTC.Global.System;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,10 +11,13 @@ namespace Game.Gameplay
         [SerializeField] private int scoreRate = 1;
         [SerializeField] private float timeRate = 0.5f;
         [SerializeField] private float maxTimeScale = 2f;
+        [SerializeField] private SkinHandler skinHandler;
         
         private int _coins;
         private int _scoreNow;
         private int _recordScore;
+        private List<SkinType> _skins;
+        private SkinType _skinNow;
 
         private CoroutineObject _addingScoreCoroutine;
         private CoroutineObject _addingTimeScaleCoroutine;
@@ -62,6 +66,13 @@ namespace Game.Gameplay
             UIManager.Instance.ChangeScore(_scoreNow);
         }
 
+        public void AddSkin(SkinType skinType)
+        {
+            _skins ??= new List<SkinType>();
+            _skins.Add(skinType);
+        }
+        
+
         public void SetCoins(int coins)
         {
             _coins = coins;
@@ -74,6 +85,13 @@ namespace Game.Gameplay
             _recordScore = recordScore;
             
             UIManager.Instance.ChangeRecordScore(_recordScore);
+        }
+        
+        public void SetSkins(List<SkinType> skins, SkinType skinNow)
+        {
+            _skins = new List<SkinType>(skins);
+            _skinNow = skinNow;
+            skinHandler.SetSkin(skinNow);
         }
 
         public void Save()

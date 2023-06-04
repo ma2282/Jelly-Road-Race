@@ -140,6 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3938529201434201104}
   - component: {fileID: 8780982337313019625}
+  - component: {fileID: 8853373}
   m_Layer: 0
   m_Name: JellyMesh
   m_TagString: Untagged
@@ -181,6 +182,36 @@ MonoBehaviour:
   damping: 0.95
   meshFilter: {fileID: 8017243659181081335}
   meshRenderer: {fileID: 5080853395747758977}
+--- !u!114 &8853373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3884283707731204623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77ae82648acc4e7eb1038e89a107863e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinNow:
+    SkinObject: {fileID: 7068308742024755318}
+    SkinType: 0
+  allSkins:
+  - SkinObject: {fileID: 6865303313761562001, guid: af9ebd428e3915d4c8461b1163cb362e, type: 3}
+    SkinType: 0
+  - SkinObject: {fileID: 7388434126556423222, guid: fa845d5966c779f449adfbcd27b08fb4, type: 3}
+    SkinType: 1
+  - SkinObject: {fileID: 6088953764995169331, guid: f06cf47afd018434793fd35b7a0c6d29, type: 3}
+    SkinType: 2
+  - SkinObject: {fileID: 3586328541712902326, guid: 21704265da7790b43b754f93e0184497, type: 3}
+    SkinType: 3
+  - SkinObject: {fileID: 74225646245814404, guid: 19995a7d9b5c9524e990a8b004100cb5, type: 3}
+    SkinType: 4
+  jellyMesh: {fileID: 8780982337313019625}
+  OnSkinChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7068308742024755318
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +386,7 @@ MonoBehaviour:
   _jellyMesh: {fileID: 8780982337313019625}
   _colorsInventory: {fileID: 781444167}
   _jumpController: {fileID: 8419726599872943034}
+  _skinHandler: {fileID: 8853373}
 --- !u!114 &781444171
 MonoBehaviour:
   m_ObjectHideFlags: 0

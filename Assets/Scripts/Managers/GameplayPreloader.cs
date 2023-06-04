@@ -17,6 +17,7 @@ namespace Game.Gameplay
             
             ValuesManager.Instance.SetCoins(data.Coins);
             ValuesManager.Instance.SetRecordScore(data.RecordScore);
+            ValuesManager.Instance.SetSkins(data.Skins, data.SkinNow);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Game.Gameplay
         [SerializeField] private JellyMesh _jellyMesh;
         [SerializeField] private ColorsInventory _colorsInventory;
         [SerializeField] private JumpController _jumpController;
+        [SerializeField] private SkinHandler _skinHandler;
 
         private ColorAbility _lastColorAbility;
 

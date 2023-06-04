@@ -2,7 +2,7 @@ using System.IO;
 using MessagePack;
 using UnityEngine;
 
-namespace Game
+namespace Game.Gameplay
 {
     public static class SaveLoadSystem
     {

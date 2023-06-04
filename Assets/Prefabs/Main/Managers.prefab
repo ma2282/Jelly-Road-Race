@@ -50,6 +50,85 @@ MonoBehaviour:
   gameOverUI: {fileID: 0}
   settingsUI: {fileID: 0}
   shopUI: {fileID: 0}
+--- !u!1 &1875489691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875489693}
+  - component: {fileID: 1875489692}
+  - component: {fileID: 2052431237420943321}
+  - component: {fileID: 7647546270407294770}
+  m_Layer: 0
+  m_Name: AdsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1875489693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875489691}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1189610013030797483}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1875489692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875489691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8971331a5adb0429cc363df3c44f62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTestMod: 1
+  androidGameId: 5302068
+  iosGameId: 5302069
+--- !u!114 &2052431237420943321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875489691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79cff7f6327c0548b35b8df5b5d4a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  androidAdUnityId: Interstitial_Android
+  iosAdUnityId: Interstitial_iOS
+--- !u!114 &7647546270407294770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875489691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6add6c4b718c4ef7bcddb1a76f02dfd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  androidAdUnityId: Rewarded_Android
+  iosAdUnityId: Rewarded_iOS
+  oneAdReward: 250
+  twoAdReward: 600
 --- !u!1 &1189610013030797484
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,6 +164,7 @@ Transform:
   - {fileID: 192208091}
   - {fileID: 7481686701760439643}
   - {fileID: 4402315750574920620}
+  - {fileID: 1875489693}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -477,11 +557,12 @@ MonoBehaviour:
       m_RotationOrder: 4
     ColorAbility: {fileID: 11400000, guid: 11b09167d5416414cac9123a88543657, type: 2}
   fogImage: {fileID: 0}
+  playerRenderer: {fileID: 0}
   mainRenderers:
-  - {fileID: 0}
   - {fileID: 0}
   _postProcessProfile: {fileID: 11400000, guid: e6c030c777613b54da50d5736a81b150, type: 2}
   _mainColorsInventory: {fileID: 0}
+  _skinHandler: {fileID: 0}
 --- !u!1 &5143913563416512929
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +654,7 @@ MonoBehaviour:
   scoreRate: 1
   timeRate: 0.05
   maxTimeScale: 10
+  skinHandler: {fileID: 0}
 --- !u!1001 &8229238888534232822
 PrefabInstance:
   m_ObjectHideFlags: 0
