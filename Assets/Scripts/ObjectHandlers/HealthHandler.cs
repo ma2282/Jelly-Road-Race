@@ -8,6 +8,8 @@ namespace Game.Gameplay
     {
         [SerializeField] private float defaultHealth = 1f;
         [SerializeField] private float health = 1f;
+        [SerializeField] private AudioSource healAudio;
+        [SerializeField] private AudioSource takeDamageAudio;
 
         private int _defense;
 
@@ -39,6 +41,8 @@ namespace Game.Gameplay
             else
                 Health -= damage;
 
+            takeDamageAudio.Play();
+            
             OnTakeDamage?.Invoke();
         }
 
@@ -48,6 +52,8 @@ namespace Game.Gameplay
                 throw new ArgumentException("Health Point less than zero");
 
             Health += healthPoint;
+            
+            healAudio.Play();
             
             OnHeal?.Invoke();
         }

@@ -74,6 +74,7 @@ namespace Game.Gameplay
             ChunkManager.Instance.StartMoving();
             ValuesManager.Instance.StartScore();
             IsPaused = false;
+            AudioManager.Instance.SetGameplay();
         }
 
         private void InitializeHome()
@@ -83,6 +84,7 @@ namespace Game.Gameplay
             ValuesManager.Instance.StopScore();
             ValuesManager.Instance.Save();
             ValuesManager.Instance.RestoreDefaults();
+            AudioManager.Instance.SetMenu();
         }
 
         public void ExitGame()

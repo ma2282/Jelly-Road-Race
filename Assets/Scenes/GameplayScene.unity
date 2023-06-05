@@ -321,6 +321,10 @@ PrefabInstance:
       propertyPath: pauseMenuUI
       value: 
       objectReference: {fileID: 750911591}
+    - target: {fileID: 3763365135877038526, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
+      propertyPath: settingsUI
+      value: 
+      objectReference: {fileID: 1018965719}
     - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
       propertyPath: fogImage
       value: 

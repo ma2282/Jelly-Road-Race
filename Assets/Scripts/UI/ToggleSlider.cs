@@ -16,11 +16,19 @@ namespace Game
         [SerializeField] private Image fillArea;
         [SerializeField] private Image handle;
 
+        private const float MIN_VOLUME_DIFFERENCE = 0.1f;
+        
         public UnityEvent<float> onClick;
         
         private void Start()
         {
             slider.onValueChanged.AddListener(ChangeColor);
+        }
+
+        public void InitializeValue(float value)
+        {
+            slider.value = value;
+            ChangeColor(value);
         }
 
         private void ChangeColor(float value)

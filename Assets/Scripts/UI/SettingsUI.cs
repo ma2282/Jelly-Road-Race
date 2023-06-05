@@ -29,7 +29,13 @@ namespace Game.Gameplay
 
         private void ChangeMusic(float value)
         {
-            AudioManager.Instance.ChangeMusic(value);
+            AudioManager.Instance.ChangeMusicVolume(value);
+        }
+
+        public void InitializeVolume(float volume, float musicVolume)
+        {
+            volumeToggle.InitializeValue(volume);
+            musicToggle.InitializeValue(musicVolume);
         }
     }
 }
