@@ -6,7 +6,9 @@ namespace Game.Gameplay
     [Serializable]
     public class Skin
     {
-        public GameObject SkinObject;
-        public SkinType SkinType;
+        public bool IsLocked;
+        public int Price;
+        public GameObject Object;
+        public SkinType Type;
     }
 }

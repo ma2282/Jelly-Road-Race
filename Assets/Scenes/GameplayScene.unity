@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &8853373 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8853373, guid: 12c565aa888ae194bad6b0d9b9de6e55, type: 3}
-  m_PrefabInstance: {fileID: 5151966388403410457}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77ae82648acc4e7eb1038e89a107863e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &558754895 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1187128976710672623, guid: 12c565aa888ae194bad6b0d9b9de6e55, type: 3}
@@ -194,11 +183,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a88d5d78953bc8458f45c9a5398ea77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &1160207443 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5080853395747758977, guid: 12c565aa888ae194bad6b0d9b9de6e55, type: 3}
-  m_PrefabInstance: {fileID: 5151966388403410457}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1260425605 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1260425605, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
@@ -226,6 +210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1677072457 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3938529201434201104, guid: 12c565aa888ae194bad6b0d9b9de6e55, type: 3}
+  m_PrefabInstance: {fileID: 5151966388403410457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1768425643 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1768425643, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
@@ -337,14 +326,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1657137162}
     - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: _skinHandler
-      value: 
-      objectReference: {fileID: 8853373}
-    - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: playerRenderer
-      value: 
-      objectReference: {fileID: 1160207443}
-    - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
       propertyPath: _mainColorsInventory
       value: 
       objectReference: {fileID: 781444167}
@@ -352,10 +333,10 @@ PrefabInstance:
       propertyPath: mainRenderers.Array.data[0]
       value: 
       objectReference: {fileID: 1468857637}
-    - target: {fileID: 8954083200312823281, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: skinHandler
+    - target: {fileID: 8221653457379395122, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
+      propertyPath: skinParentTransform
       value: 
-      objectReference: {fileID: 8853373}
+      objectReference: {fileID: 1677072457}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
 --- !u!1001 &1481977062090893207
@@ -365,34 +346,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2130962481, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130962481, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130962481, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130962481, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130962481, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 190
-      objectReference: {fileID: 0}
-    - target: {fileID: 2130962481, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2585709466100194507, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5974062995375931194, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -441,10 +394,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 8507587615073964158, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
-      propertyPath: skinHandler
-      value: 
-      objectReference: {fileID: 8853373}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
 --- !u!114 &1481977062090893208 stripped

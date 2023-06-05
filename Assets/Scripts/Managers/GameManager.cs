@@ -12,6 +12,7 @@ namespace Game.Gameplay
 
         private bool _isPaused = true;
         private float _timeBackup;
+        private GameState _gameState;
         
         
         public bool IsPaused
@@ -32,8 +33,10 @@ namespace Game.Gameplay
 
         public GameState GameState
         {
+            get => _gameState;
             set
             {
+                _gameState = value;
                 UIManager.Instance.ShowUI(value);
 
                 switch (value)
@@ -58,8 +61,12 @@ namespace Game.Gameplay
 
         private void OnApplicationQuit()
         {
-            ValuesManager.Instance.Save();
+            SaveData data = ValuesManager.Instance.Save();
+            data.SetSkinsInfo(SkinsManager.Instance.Save());
+            
             ColorsManager.Instance.ResetColors();
+            
+            SaveLoadSystem.SaveData(data);
         }
 
         private void InitializeGameplay()

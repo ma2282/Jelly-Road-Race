@@ -45,10 +45,10 @@ namespace Game.Gameplay
             switch (_type)
             {
                 case AdType.OneCoinsAd:
-                    ValuesManager.Instance.AddCoins(oneAdReward);
+                    ValuesManager.Instance.Coins += oneAdReward;
                     break;
                 case AdType.TwoCoinsAd:
-                    ValuesManager.Instance.AddCoins(twoAdReward);
+                    ValuesManager.Instance.Coins += twoAdReward;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -14,8 +14,7 @@ namespace Game.Gameplay
         [SerializeField] private Renderer[] mainRenderers;
         [SerializeField] private PostProcessProfile _postProcessProfile;
         [SerializeField] private ColorsInventory _mainColorsInventory;
-        [SerializeField] private SkinHandler _skinHandler;
-        
+
         private ColorGrading _colorGrading;
 
         public GameColor DefaultColor => defaultColor;
@@ -25,7 +24,6 @@ namespace Game.Gameplay
             _colorGrading = _postProcessProfile.settings.Find(x => x is ColorGrading) as ColorGrading;
             ResetColors();
             _mainColorsInventory.OnColorChanged.AddListener(ChangeColor);
-            _skinHandler.OnSkinChanged.AddListener(ChangePlayerRenderer);
         }
 
         public void ChangeColor(GameColor color)
@@ -61,9 +59,9 @@ namespace Game.Gameplay
             return possibleColors[Random.Range(0, possibleColors.Length)];
         }
 
-        public void ChangePlayerRenderer(Skin skin)
+        public void ChangePlayerRenderer(ReadonlySkin skin)
         {
-            playerRenderer = skin.SkinObject.GetComponent<Renderer>();
+            playerRenderer = skin.Renderer;
         }
     }
 }

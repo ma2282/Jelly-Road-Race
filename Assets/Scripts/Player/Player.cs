@@ -11,12 +11,14 @@ namespace Game.Gameplay
         [SerializeField] private JellyMesh _jellyMesh;
         [SerializeField] private ColorsInventory _colorsInventory;
         [SerializeField] private JumpController _jumpController;
-        [SerializeField] private SkinHandler _skinHandler;
 
         private ColorAbility _lastColorAbility;
 
-        private void Start()
+        private void Awake()
         {
+            SkinsManager.Instance.OnSkinChanged.AddListener(x => _jellyMesh.SetMeshFromSkin(x));
+            SkinsManager.Instance.OnSkinChanged.AddListener(ColorsManager.Instance.ChangePlayerRenderer);
+            
             _movementController.OnMovingStart.AddListener(_animationsHandler.DeactivateIdle);
             _movementController.OnMovingEnd.AddListener(_animationsHandler.ActivateIdle);
             
@@ -48,7 +50,7 @@ namespace Game.Gameplay
             if (obstacle is not ObstacleWithColor) return;
             
             _colorsInventory.AddColor(obstacle.Color);
-            ValuesManager.Instance.AddCoins(1);
+            ValuesManager.Instance.Coins++;
         }
 
         public void ReceiveColorAbility(ColorAbility ability)

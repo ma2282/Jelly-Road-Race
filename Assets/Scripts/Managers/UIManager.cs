@@ -60,7 +60,11 @@ namespace Game.Gameplay
             shopUI.gameObject.SetActive(true);
         }
 
-        public void ChangeCoins(int coins) => gameplayUI.ChangeCoins(coins);
+        public void ChangeCoins(int coins)
+        {
+            shopUI.ChangeCoins(coins);
+            gameplayUI.ChangeCoins(coins);
+        } 
 
         public void ChangeScore(int score) => gameplayUI.ChangeScore(score);
 

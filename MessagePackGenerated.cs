@@ -49,7 +49,7 @@ namespace MessagePack.Resolvers
         {
             lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(3)
             {
-                { typeof(global::System.Collections.Generic.List<global::Game.Gameplay.SkinType>), 0 },
+                { typeof(global::System.Collections.Generic.List<bool>), 0 },
                 { typeof(global::Game.Gameplay.SkinType), 1 },
                 { typeof(global::Game.Gameplay.SaveData), 2 },
             };
@@ -65,7 +65,7 @@ namespace MessagePack.Resolvers
 
             switch (key)
             {
-                case 0: return new global::MessagePack.Formatters.ListFormatter<global::Game.Gameplay.SkinType>();
+                case 0: return new global::MessagePack.Formatters.ListFormatter<bool>();
                 case 1: return new MessagePack.Formatters.Game.Gameplay.SkinTypeFormatter();
                 case 2: return new MessagePack.Formatters.Game.Gameplay.SaveDataFormatter();
                 default: return null;
@@ -147,10 +147,10 @@ namespace MessagePack.Formatters.Game.Gameplay
         private static global::System.ReadOnlySpan<byte> GetSpan_Coins() => new byte[1 + 5] { 165, 67, 111, 105, 110, 115 };
         // RecordScore
         private static global::System.ReadOnlySpan<byte> GetSpan_RecordScore() => new byte[1 + 11] { 171, 82, 101, 99, 111, 114, 100, 83, 99, 111, 114, 101 };
-        // Skins
-        private static global::System.ReadOnlySpan<byte> GetSpan_Skins() => new byte[1 + 5] { 165, 83, 107, 105, 110, 115 };
-        // SkinNow
-        private static global::System.ReadOnlySpan<byte> GetSpan_SkinNow() => new byte[1 + 7] { 167, 83, 107, 105, 110, 78, 111, 119 };
+        // SkinLockedStates
+        private static global::System.ReadOnlySpan<byte> GetSpan_SkinLockedStates() => new byte[1 + 16] { 176, 83, 107, 105, 110, 76, 111, 99, 107, 101, 100, 83, 116, 97, 116, 101, 115 };
+        // SkinNowType
+        private static global::System.ReadOnlySpan<byte> GetSpan_SkinNowType() => new byte[1 + 11] { 171, 83, 107, 105, 110, 78, 111, 119, 84, 121, 112, 101 };
 
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Game.Gameplay.SaveData value, global::MessagePack.MessagePackSerializerOptions options)
         {
@@ -166,10 +166,10 @@ namespace MessagePack.Formatters.Game.Gameplay
             writer.Write(value.Coins);
             writer.WriteRaw(GetSpan_RecordScore());
             writer.Write(value.RecordScore);
-            writer.WriteRaw(GetSpan_Skins());
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::Game.Gameplay.SkinType>>(formatterResolver).Serialize(ref writer, value.Skins, options);
-            writer.WriteRaw(GetSpan_SkinNow());
-            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Game.Gameplay.SkinType>(formatterResolver).Serialize(ref writer, value.SkinNow, options);
+            writer.WriteRaw(GetSpan_SkinLockedStates());
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<bool>>(formatterResolver).Serialize(ref writer, value.SkinLockedStates, options);
+            writer.WriteRaw(GetSpan_SkinNowType());
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Game.Gameplay.SkinType>(formatterResolver).Serialize(ref writer, value.SkinNowType, options);
         }
 
         public global::Game.Gameplay.SaveData Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -194,25 +194,31 @@ namespace MessagePack.Formatters.Game.Gameplay
                       reader.Skip();
                       continue;
                     case 5:
+                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 495773642563UL) { goto FAIL; }
+
+                        ____result.Coins = reader.ReadInt32();
+                        continue;
+                    case 11:
                         switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
                         {
                             default: goto FAIL;
-                            case 495773642563UL:
-                                ____result.Coins = reader.ReadInt32();
+                            case 7157174675479684434UL:
+                                if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 6648431UL) { goto FAIL; }
+
+                                ____result.RecordScore = reader.ReadInt32();
                                 continue;
-                            case 495773641555UL:
-                                ____result.Skins = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<global::Game.Gameplay.SkinType>>(formatterResolver).Deserialize(ref reader, options);
+
+                            case 6086455804065049427UL:
+                                if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 6647929UL) { goto FAIL; }
+
+                                ____result.SkinNowType = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Game.Gameplay.SkinType>(formatterResolver).Deserialize(ref reader, options);
                                 continue;
+
                         }
-                    case 11:
-                        if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_RecordScore().Slice(1))) { goto FAIL; }
+                    case 16:
+                        if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_SkinLockedStates().Slice(1))) { goto FAIL; }
 
-                        ____result.RecordScore = reader.ReadInt32();
-                        continue;
-                    case 7:
-                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 33617904879102803UL) { goto FAIL; }
-
-                        ____result.SkinNow = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::Game.Gameplay.SkinType>(formatterResolver).Deserialize(ref reader, options);
+                        ____result.SkinLockedStates = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::System.Collections.Generic.List<bool>>(formatterResolver).Deserialize(ref reader, options);
                         continue;
 
                 }

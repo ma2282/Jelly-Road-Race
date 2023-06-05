@@ -26,6 +26,8 @@ namespace Game.Gameplay
 
         private void InitializeMesh()
         {
+            if (meshFilter == null) return;
+            
             _originalMesh = meshFilter.sharedMesh;
             _cloneMesh = Instantiate(_originalMesh);
             meshFilter.sharedMesh = _cloneMesh;
@@ -35,10 +37,10 @@ namespace Game.Gameplay
                 _jellyVertices[i] = new JellyVertex(i, _transform.TransformPoint(_cloneMesh.vertices[i]));
         }
 
-        public void SetMesh(GameObject gameObject)
+        public void SetMeshFromSkin(ReadonlySkin skin)
         {
-            meshFilter = gameObject.GetComponent<MeshFilter>();
-            meshRenderer = gameObject.GetComponent<MeshRenderer>();
+            meshFilter = skin.Filter;
+            meshRenderer = skin.Renderer;
 
             InitializeMesh();
         }

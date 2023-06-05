@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NTC.Global.System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Game.Gameplay
@@ -11,17 +14,24 @@ namespace Game.Gameplay
         [SerializeField] private int scoreRate = 1;
         [SerializeField] private float timeRate = 0.5f;
         [SerializeField] private float maxTimeScale = 2f;
-        [SerializeField] private SkinHandler skinHandler;
-        
+
         private int _coins;
         private int _scoreNow;
         private int _recordScore;
-        private List<SkinType> _skins;
-        private SkinType _skinNow;
 
         private CoroutineObject _addingScoreCoroutine;
         private CoroutineObject _addingTimeScaleCoroutine;
-        
+
+        public int Coins
+        {
+            get => _coins;
+            set
+            {
+                _coins = value;
+                UIManager.Instance.ChangeCoins(value);
+            }
+        }
+
         private void Start()
         {
             _addingScoreCoroutine = new CoroutineObject(this, AddingScoreCoroutine);
@@ -51,12 +61,6 @@ namespace Game.Gameplay
             Time.timeScale = Mathf.Min(maxTimeScale, Time.timeScale + timeRate / Time.timeScale);
         }
 
-        public void AddCoins(int coins)
-        {
-            _coins += coins;
-            UIManager.Instance.ChangeCoins(_coins);
-        }
-
         public void AddScore(int score)
         {
             _scoreNow += score;
@@ -66,18 +70,12 @@ namespace Game.Gameplay
             UIManager.Instance.ChangeScore(_scoreNow);
         }
 
-        public void AddSkin(SkinType skinType)
-        {
-            _skins ??= new List<SkinType>();
-            _skins.Add(skinType);
-        }
-        
 
         public void SetCoins(int coins)
         {
-            _coins = coins;
+            Coins = coins;
             
-            UIManager.Instance.ChangeCoins(_coins);
+            UIManager.Instance.ChangeCoins(Coins);
         }
 
         public void SetRecordScore(int recordScore)
@@ -86,19 +84,12 @@ namespace Game.Gameplay
             
             UIManager.Instance.ChangeRecordScore(_recordScore);
         }
-        
-        public void SetSkins(List<SkinType> skins, SkinType skinNow)
-        {
-            _skins = new List<SkinType>(skins);
-            _skinNow = skinNow;
-            skinHandler.SetSkin(skinNow);
-        }
 
-        public void Save()
+        public SaveData Save()
         {
-            SaveData data = new (){Coins = _coins, RecordScore = _recordScore};
-
-            SaveLoadSystem.SaveData(data);
+            SaveData data = new (){Coins = Coins, RecordScore = _recordScore};
+            
+            return data;
         }
 
         public void RestoreDefaults()
