@@ -28,6 +28,8 @@ namespace Game.Gameplay
 
         public void ChangeColor(GameColor color)
         {
+            if (playerRenderer == null) return;
+            
             foreach (Renderer mainRenderer in mainRenderers)
             {
                 Material material = mainRenderer.material;

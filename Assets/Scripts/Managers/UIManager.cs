@@ -18,6 +18,12 @@ namespace Game.Gameplay
         
         private void Start()
         {
+            if (_UIs == null)
+                Initialize();
+        }
+
+        private void Initialize()
+        {
             startUI.Initialize();
             gameplayUI.Initialize();
             pauseMenuUI.Initialize();
@@ -38,6 +44,9 @@ namespace Game.Gameplay
 
         public void ShowUI(GameState gameState)
         {
+            if (_UIs == null)
+                Initialize();
+            
             GameObject UIToShow = gameState switch
             {
                 GameState.Started => gameplayUI.gameObject,

@@ -336,9 +336,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intensity: 1
-  mass: 2
+  mass: 1
   stiffness: 0.25
-  damping: 0.95
+  damping: 0.8
   meshFilter: {fileID: 0}
   meshRenderer: {fileID: 0}
 --- !u!1 &8571841789585945468
@@ -666,7 +666,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8cf7c58ec4b1cae49b2acad8e7636f27, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0

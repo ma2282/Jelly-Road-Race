@@ -58,7 +58,7 @@ namespace Game.Gameplay
 
         private void ProcessAndroidInput()
         {
-            if (GameManager.Instance.IsPaused || GameManager.Instance.GameState == GameState.Finished) return;
+            if (TimeManager.Instance.IsPaused || GameManager.Instance.GameState == GameState.Finished) return;
             
             if (Input.touchCount == 1)
             {
@@ -110,20 +110,19 @@ namespace Game.Gameplay
         #if UNITY_EDITOR
         private void ProcessUnityInput()
         {
-            if (!GameManager.Instance.IsPaused && GameManager.Instance.GameState != GameState.Finished)
-            {
-                _horizontalMovement = (Input.GetKeyDown(KeyCode.D) ? 1f : 0f) + (Input.GetKeyDown(KeyCode.A) ? -1f : 0f);
-                _verticalMovement = (Input.GetKeyDown(KeyCode.W) ? 1f : 0f) + (Input.GetKeyDown(KeyCode.S) ? -1f : 0f);
+            if (TimeManager.Instance.IsPaused || GameManager.Instance.GameState == GameState.Finished) return;
             
-                if (_horizontalMovement != 0f)
-                    mainMovementController.Move(_horizontalMovement);
+            _horizontalMovement = (Input.GetKeyDown(KeyCode.D) ? 1f : 0f) + (Input.GetKeyDown(KeyCode.A) ? -1f : 0f);
+            _verticalMovement = (Input.GetKeyDown(KeyCode.W) ? 1f : 0f) + (Input.GetKeyDown(KeyCode.S) ? -1f : 0f);
+            
+            if (_horizontalMovement != 0f)
+                mainMovementController.Move(_horizontalMovement);
 
-                if (_verticalMovement != 0f)
-                    mainColorsInventory.ShiftColor((int)_verticalMovement);
+            if (_verticalMovement != 0f)
+                mainColorsInventory.ShiftColor((int)_verticalMovement);
 
-                if (Input.GetKeyDown(KeyCode.Space) && mainJumpController.gameObject.activeInHierarchy)
-                    mainJumpController.Jump();
-            }
+            if (Input.GetKeyDown(KeyCode.Space) && mainJumpController.gameObject.activeInHierarchy)
+                mainJumpController.Jump();
         }
         #endif
     }

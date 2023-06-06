@@ -18,7 +18,7 @@ namespace Game.Gameplay
             if (!owner.TryGetComponent(out _movementController)) return;
 
             _movementController.SpeedRate *= speedRate;
-            Time.timeScale *= timeSpeedRate;
+            TimeManager.Instance.TimeScale *= timeSpeedRate;
         }
 
         public override void DeactivateAbility()
@@ -26,7 +26,7 @@ namespace Game.Gameplay
             if (_movementController == null) return;
 
             _movementController.SpeedRate /= speedRate;
-            Time.timeScale /= timeSpeedRate;
+            TimeManager.Instance.TimeScale /= timeSpeedRate;
         }
     }
 }

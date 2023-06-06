@@ -35,10 +35,14 @@ namespace Game.Gameplay
 
         private void Start()
         {
+            Initialize();
+            ResetPosition();
+        }
+
+        private void Initialize()
+        {
             _ownerTransform = transform;
             _moveCoroutine = new CoroutineObject(this, MoveCoroutine);
-
-            ResetPosition();
         }
 
         public void Move(float horizontalMovement)
@@ -92,6 +96,9 @@ namespace Game.Gameplay
 
         public void ResetPosition()
         {
+            if (_ownerTransform == null)
+                Initialize();
+            
             _positionIndex = startPositionIndex;
 
             _ownerTransform.position = allPositions[_positionIndex];

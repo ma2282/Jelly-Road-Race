@@ -17,15 +17,13 @@ namespace Game.Gameplay
 
         public void InitializeSkins(List<bool> skinLockedStates, SkinType skinNowType)
         {
-            if (skinLockedStates.Count != allSkins.Count) 
-                throw new Exception("Skins initializing is wrong");
+            Skin skin = allSkins.FirstOrDefault(x => x.Type == skinNowType) ?? allSkins[0];
 
-            for (int i = 0; i < skinLockedStates.Count; i++)
-                allSkins[i].IsLocked = skinLockedStates[i];
-            
-            Skin skin = allSkins.FirstOrDefault(x => x.Type == skinNowType);
-            
             SetSkinObject(skin);
+            
+            for (int i = 0; i < allSkins.Count; i++)
+                allSkins[i].IsLocked = skinLockedStates.Count < allSkins.Count || skinLockedStates[i];
+            allSkins[0].IsLocked = false;
         }
         
         private void SetSkinObject(Skin skin)

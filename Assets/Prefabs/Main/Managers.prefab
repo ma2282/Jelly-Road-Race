@@ -82,7 +82,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1189610013030797483}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1875489692
 MonoBehaviour:
@@ -164,6 +164,7 @@ Transform:
   - {fileID: 192208091}
   - {fileID: 524235249135286760}
   - {fileID: 7481686701760439643}
+  - {fileID: 2347009243585628169}
   - {fileID: 1875489693}
   - {fileID: 522836734057163754}
   - {fileID: 4402315750574920620}
@@ -324,9 +325,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e463e0f8b844688f03c49417b8d7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minDistanceForSwipe: 20
   mainMovementController: {fileID: 0}
   mainJumpController: {fileID: 0}
   mainColorsInventory: {fileID: 0}
+  OnTouchClick:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSwipeLeft:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSwipeRight:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSwipeUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSwipeDown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2114402357313471225
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +374,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1189610013030797483}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8221653457379395122
 MonoBehaviour:
@@ -726,7 +743,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.2
+        time: 0.25
         value: 0.5
         inSlope: 0
         outSlope: 0
@@ -735,7 +752,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.3
+        time: 0.35
         value: 0
         inSlope: 0
         outSlope: 0
@@ -764,7 +781,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    ColorAbility: {fileID: 11400000, guid: 564a016c65bb94e4f9492102477f8048, type: 2}
+    ColorAbility: {fileID: 11400000, guid: b247601c017b9f241bdb0e12bc2c06e5, type: 2}
   - Color: {r: 0, g: 1, b: 0.59133935, a: 1}
     HueVsSaturationCurve:
       serializedVersion: 2
@@ -1070,7 +1087,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1189610013030797483}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1712048023440897411
 MonoBehaviour:
@@ -1084,6 +1101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbfef67d2e534dd0815618727c8dc510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultData:
+    Coins: 0
+    RecordScore: 0
+    SkinLockedStates: 
+    SkinNowType: 0
 --- !u!1 &6014960885948588963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,8 +1151,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreRate: 1
-  timeRate: 0.05
-  maxTimeScale: 10
+--- !u!1 &7963539002637995114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2347009243585628169}
+  - component: {fileID: 1392593921886199589}
+  m_Layer: 0
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2347009243585628169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963539002637995114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1189610013030797483}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1392593921886199589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7963539002637995114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ac70e6e5004a53b131ce40e6c549dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeRate: 0.1
+  maxTimeScale: 5
 --- !u!1001 &8229238888534232822
 PrefabInstance:
   m_ObjectHideFlags: 0

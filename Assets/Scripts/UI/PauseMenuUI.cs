@@ -12,8 +12,6 @@ namespace Game.Gameplay
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button homeButton;
 
-        private float _timeScaleBackup;
-
         public void Initialize()
         {
             pauseButton.onClick.AddListener(PauseGame);
@@ -28,14 +26,14 @@ namespace Game.Gameplay
         
         public void PauseGame()
         {
-            GameManager.Instance.IsPaused = true;
+            TimeManager.Instance.PauseGame();
             
             gameObject.SetActive(true);
         }
 
         public void ResumeGame()
         {
-            GameManager.Instance.IsPaused = false;
+            TimeManager.Instance.ResumeGame();
             
             gameObject.SetActive(false);
         }

@@ -12,15 +12,13 @@ namespace Game.Gameplay
     public class ValuesManager : Singleton<ValuesManager>
     {
         [SerializeField] private int scoreRate = 1;
-        [SerializeField] private float timeRate = 0.5f;
-        [SerializeField] private float maxTimeScale = 2f;
 
         private int _coins;
         private int _scoreNow;
         private int _recordScore;
 
         private CoroutineObject _addingScoreCoroutine;
-        private CoroutineObject _addingTimeScaleCoroutine;
+        
 
         public int Coins
         {
@@ -34,8 +32,13 @@ namespace Game.Gameplay
 
         private void Start()
         {
+            if (_addingScoreCoroutine == null)
+                Initialize();
+        }
+
+        private void Initialize()
+        {
             _addingScoreCoroutine = new CoroutineObject(this, AddingScoreCoroutine);
-            _addingTimeScaleCoroutine = new CoroutineObject(this, AddingTimeScaleCoroutine);
         }
 
         private IEnumerator AddingScoreCoroutine()
@@ -45,20 +48,6 @@ namespace Game.Gameplay
                 AddScore(scoreRate);
                 yield return new WaitForSeconds(1f);
             }
-        }
-
-        private IEnumerator AddingTimeScaleCoroutine()
-        {
-            while (true)
-            {
-                AddTimeScale();
-                yield return new WaitForSeconds(1f);
-            }
-        }
-
-        private void AddTimeScale()
-        {
-            Time.timeScale = Mathf.Min(maxTimeScale, Time.timeScale + timeRate / Time.timeScale);
         }
 
         public void AddScore(int score)
@@ -96,21 +85,24 @@ namespace Game.Gameplay
         {
             _scoreNow = 0;
 
-            Time.timeScale = 1f;
-
             UIManager.Instance.ChangeScore(_scoreNow);
         }
 
         public void StartScore()
         {
+            if (_addingScoreCoroutine == null)
+                Initialize();
+            
             _addingScoreCoroutine.Start();
-            _addingTimeScaleCoroutine.Start();
         }
 
         public void StopScore()
         {
+            if (_addingScoreCoroutine == null)
+                Initialize();
+            
             _addingScoreCoroutine.Stop();
-            _addingTimeScaleCoroutine.Stop();
+            UIManager.Instance.ChangeRecordScore(_recordScore);
         }
     }
 }

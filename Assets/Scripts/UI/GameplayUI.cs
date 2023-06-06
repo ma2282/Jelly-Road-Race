@@ -1,5 +1,7 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Gameplay
 {
@@ -10,6 +12,12 @@ namespace Game.Gameplay
         
         private int _score;
         private int _coins;
+
+        private void Start()
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(scoreText.rectTransform);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(coinsText.rectTransform);
+        }
 
         public void Initialize()
         {}

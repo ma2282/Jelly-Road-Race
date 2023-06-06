@@ -31,7 +31,7 @@ namespace Game.Gameplay
             _healthHandler.OnHeal.AddListener(_animationsHandler.TriggerHeal);
             _healthHandler.OnTakeDamage.AddListener(_animationsHandler.TriggerDamage);
             
-            _healthHandler.OnKilled.AddListener(GameManager.Instance.GameOver);
+            _healthHandler.OnKilled.AddListener(() => GameManager.Instance.GameState = GameState.Finished);
             
             _colorsInventory.Reset(this);
         }

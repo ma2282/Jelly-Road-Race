@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using MessagePack;
 
 namespace Game.Gameplay
 {
     [MessagePackObject]
+    [Serializable]
     public class SaveData
     {
         [Key(0)] public int Coins;

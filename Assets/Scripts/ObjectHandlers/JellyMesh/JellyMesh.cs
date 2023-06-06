@@ -19,14 +19,14 @@ namespace Game.Gameplay
 
         private void Start()
         {
-            _transform = transform;
-
             InitializeMesh();
         }
 
         private void InitializeMesh()
         {
             if (meshFilter == null) return;
+            
+            _transform = transform;
             
             _originalMesh = meshFilter.sharedMesh;
             _cloneMesh = Instantiate(_originalMesh);
@@ -45,16 +45,21 @@ namespace Game.Gameplay
             InitializeMesh();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
+            if (TimeManager.Instance.IsPaused) return;
+
             _verticesArray = _originalMesh.vertices;
 
+            Bounds bounds = meshRenderer.bounds;
+            float boundsMaxY = bounds.max.y;
+            float optimizedTemp = intensity / bounds.size.y;
+            
             foreach (JellyVertex vertex in _jellyVertices)
             {
                 Vector3 target = _transform.TransformPoint(_verticesArray[vertex.ID]);
                 
-                Bounds bounds = meshRenderer.bounds;
-                float intensityNow = (1 - (bounds.max.y - target.y) / bounds.size.y) * intensity;
+                float intensityNow = intensity - optimizedTemp * (boundsMaxY - target.y);
                 vertex.Shake(target, mass, stiffness, damping);
                 target = _transform.InverseTransformPoint(vertex.Position);
                 _verticesArray[vertex.ID] =
@@ -66,6 +71,8 @@ namespace Game.Gameplay
 
         public void Reset()
         {
+            if (_originalMesh == null) return;
+
             _verticesArray = _originalMesh.vertices;
             
             foreach (JellyVertex vertex in _jellyVertices)

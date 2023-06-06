@@ -28,17 +28,20 @@ namespace Game.Gameplay
 
         public UnityEvent OnDestroyed;
 
+        private void Start()
+        {
+            Initialize();
+        }
+
         public void Initialize()
         {
             if (_transform != null) return;
             
-            _transform = GetComponent<Transform>();
+            _transform = transform;
             
             Vector3 position = _transform.position;
             
             nextSpawnPosition += position;
-            partChunkSampleFirstPosition += position;
-            partChunkSampleSecondPosition += position;
         }
 
         private void Update()
@@ -53,8 +56,6 @@ namespace Game.Gameplay
             
             _transform.Translate(shift);
             nextSpawnPosition += shift;
-            partChunkSampleFirstPosition += shift;
-            partChunkSampleSecondPosition += shift;
 
             if ((_transform.position - destroyPosition).sqrMagnitude > moveSpeed * Time.deltaTime) return;
             
@@ -64,15 +65,21 @@ namespace Game.Gameplay
 
         public void GenerateSample(ChunkPart part1, ChunkPart part2)
         {
-            Initialize();
-            if (!canHasPartSample) return;
+            if (_transform == null)
+                Initialize();
             
-            Instantiate(part1, partChunkSampleFirstPosition, Quaternion.identity, _transform);
-            Instantiate(part2, partChunkSampleSecondPosition, Quaternion.identity, _transform);
+            if (!canHasPartSample) return;
+
+            Vector3 position = _transform.position;
+            Instantiate(part1, partChunkSampleFirstPosition + position, Quaternion.identity, _transform);
+            Instantiate(part2, partChunkSampleSecondPosition + position, Quaternion.identity, _transform);
         }
 
         public void SpawnTrail(GameObject trail)
         {
+            if (_transform == null)
+                Initialize();
+            
             Instantiate(trail, trail.transform.position, Quaternion.identity, _transform);
         }
 
