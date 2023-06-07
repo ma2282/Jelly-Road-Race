@@ -1,18 +1,17 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.Gameplay
 {
-    public class PauseMenuUI : MonoBehaviour
+    public class PauseMenuUI : UICanvas
     {
         [SerializeField] private TextMeshProUGUI recordScoreText;
         [SerializeField] private Button pauseButton;
         [SerializeField] private Button resumeButton;
         [SerializeField] private Button homeButton;
 
-        public void Initialize()
+        public override void Initialize()
         {
             pauseButton.onClick.AddListener(PauseGame);
             resumeButton.onClick.AddListener(ResumeGame);
@@ -28,14 +27,14 @@ namespace Game.Gameplay
         {
             TimeManager.Instance.PauseGame();
             
-            gameObject.SetActive(true);
+            Open();
         }
 
         public void ResumeGame()
         {
             TimeManager.Instance.ResumeGame();
             
-            gameObject.SetActive(false);
+            Close();
         }
 
         public void ChangeRecordScore(int recordScore)

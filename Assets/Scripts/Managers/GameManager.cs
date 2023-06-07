@@ -8,7 +8,7 @@ namespace Game.Gameplay
     {
         [SerializeField] private Player mainPlayer;
         
-        private GameState _gameState;
+        private GameState _gameState = GameState.Finished;
 
         public GameState GameState
         {
@@ -56,6 +56,7 @@ namespace Game.Gameplay
             ValuesManager.Instance.StartScore();
             AudioManager.Instance.SetGameplay();
             TimeManager.Instance.StartGame();
+            ColorsManager.Instance.ResetColors();
         }
 
         private void InitializeHome()

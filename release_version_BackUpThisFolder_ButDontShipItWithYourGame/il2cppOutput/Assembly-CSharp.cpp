@@ -21629,9 +21629,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void JellyMesh_SetMeshFromSkin_mE97869E0697D7
 		return;
 	}
 }
-// System.Void Game.Gameplay.JellyMesh::FixedUpdate()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void JellyMesh_FixedUpdate_mE6CFE484651843BC25C38FA9D534AD13B5D99AD3 (JellyMesh_t8CD4149B9B68D185A0FD9BA278BED9A644592558* __this, const RuntimeMethod* method) 
+// System.Void Game.Gameplay.JellyMesh::Update()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void JellyMesh_Update_m92DAD7FAC5ED7917C6223F3CDBCA840681F668CC (JellyMesh_t8CD4149B9B68D185A0FD9BA278BED9A644592558* __this, const RuntimeMethod* method) 
 {
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Singleton_1_get_Instance_mEA102E8029F7E8E40D950EC573FC894B73FF2C6E_RuntimeMethod_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Singleton_1_tD54B3FAF1FC30A19A42ACE797D8F39906F5FC98C_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
 	Bounds_t367E830C64BBF235ED8C3B2F8CF6254FDCAD39C3 V_0;
 	memset((&V_0), 0, sizeof(V_0));
 	float V_1 = 0.0f;
@@ -21643,123 +21650,142 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void JellyMesh_FixedUpdate_mE6CFE484651843BC2
 	memset((&V_6), 0, sizeof(V_6));
 	float V_7 = 0.0f;
 	{
-		// _verticesArray = _originalMesh.vertices;
-		Mesh_t6D9C539763A09BC2B12AEAEF36F6DFFC98AE63D4* L_0 = __this->____originalMesh_11;
+		// if (TimeManager.Instance.IsPaused) return;
+		il2cpp_codegen_runtime_class_init_inline(Singleton_1_tD54B3FAF1FC30A19A42ACE797D8F39906F5FC98C_il2cpp_TypeInfo_var);
+		TimeManager_tD13AA2F81F732F3ECFCCE8C0543E6CDC6EB9EDA1* L_0;
+		L_0 = Singleton_1_get_Instance_mEA102E8029F7E8E40D950EC573FC894B73FF2C6E(Singleton_1_get_Instance_mEA102E8029F7E8E40D950EC573FC894B73FF2C6E_RuntimeMethod_var);
 		NullCheck(L_0);
-		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_1;
-		L_1 = Mesh_get_vertices_mA3577F1B08EDDD54E26AEB3F8FFE4EC247D2ABB9(L_0, NULL);
-		__this->____verticesArray_13 = L_1;
-		Il2CppCodeGenWriteBarrier((void**)(&__this->____verticesArray_13), (void*)L_1);
-		// Bounds bounds = meshRenderer.bounds;
-		MeshRenderer_t4B7747212F0B88244BB7790C61AE124BFC15BAAE* L_2 = __this->___meshRenderer_9;
-		NullCheck(L_2);
-		Bounds_t367E830C64BBF235ED8C3B2F8CF6254FDCAD39C3 L_3;
-		L_3 = Renderer_get_bounds_m390CF334730C3C34E45CE59F1D08C3B9F3109C7C(L_2, NULL);
-		V_0 = L_3;
-		// float boundsMaxY = bounds.max.y;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4;
-		L_4 = Bounds_get_max_m6446F2AB97C1E57CA89467B9DE52D4EB61F1CB09((&V_0), NULL);
-		float L_5 = L_4.___y_3;
-		V_1 = L_5;
-		// float temp = intensity / bounds.size.y;
-		float L_6 = __this->___intensity_4;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_7;
-		L_7 = Bounds_get_size_m0699A53A55A78B3201D7270D6F338DFA91B6FAD4((&V_0), NULL);
-		float L_8 = L_7.___y_3;
-		V_2 = ((float)(L_6/L_8));
-		// foreach (JellyVertex vertex in _jellyVertices)
-		JellyVertexU5BU5D_tCF4E2CD5F0DD4CB0DAED2A829E2C4D917893DE6E* L_9 = __this->____jellyVertices_14;
-		V_3 = L_9;
-		V_4 = 0;
-		goto IL_00e8;
+		bool L_1;
+		L_1 = TimeManager_get_IsPaused_mD20F9F5D2F641B7E411EDE03D3BAF2AB9DBE3D6D_inline(L_0, NULL);
+		if (!L_1)
+		{
+			goto IL_000d;
+		}
+	}
+	{
+		// if (TimeManager.Instance.IsPaused) return;
+		return;
 	}
 
-IL_004d:
+IL_000d:
+	{
+		// _verticesArray = _originalMesh.vertices;
+		Mesh_t6D9C539763A09BC2B12AEAEF36F6DFFC98AE63D4* L_2 = __this->____originalMesh_11;
+		NullCheck(L_2);
+		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_3;
+		L_3 = Mesh_get_vertices_mA3577F1B08EDDD54E26AEB3F8FFE4EC247D2ABB9(L_2, NULL);
+		__this->____verticesArray_13 = L_3;
+		Il2CppCodeGenWriteBarrier((void**)(&__this->____verticesArray_13), (void*)L_3);
+		// Bounds bounds = meshRenderer.bounds;
+		MeshRenderer_t4B7747212F0B88244BB7790C61AE124BFC15BAAE* L_4 = __this->___meshRenderer_9;
+		NullCheck(L_4);
+		Bounds_t367E830C64BBF235ED8C3B2F8CF6254FDCAD39C3 L_5;
+		L_5 = Renderer_get_bounds_m390CF334730C3C34E45CE59F1D08C3B9F3109C7C(L_4, NULL);
+		V_0 = L_5;
+		// float boundsMaxY = bounds.max.y;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_6;
+		L_6 = Bounds_get_max_m6446F2AB97C1E57CA89467B9DE52D4EB61F1CB09((&V_0), NULL);
+		float L_7 = L_6.___y_3;
+		V_1 = L_7;
+		// float optimizedTemp = intensity / bounds.size.y;
+		float L_8 = __this->___intensity_4;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_9;
+		L_9 = Bounds_get_size_m0699A53A55A78B3201D7270D6F338DFA91B6FAD4((&V_0), NULL);
+		float L_10 = L_9.___y_3;
+		V_2 = ((float)(L_8/L_10));
+		// foreach (JellyVertex vertex in _jellyVertices)
+		JellyVertexU5BU5D_tCF4E2CD5F0DD4CB0DAED2A829E2C4D917893DE6E* L_11 = __this->____jellyVertices_14;
+		V_3 = L_11;
+		V_4 = 0;
+		goto IL_00f5;
+	}
+
+IL_005a:
 	{
 		// foreach (JellyVertex vertex in _jellyVertices)
-		JellyVertexU5BU5D_tCF4E2CD5F0DD4CB0DAED2A829E2C4D917893DE6E* L_10 = V_3;
-		int32_t L_11 = V_4;
-		NullCheck(L_10);
-		int32_t L_12 = L_11;
-		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_13 = (L_10)->GetAt(static_cast<il2cpp_array_size_t>(L_12));
-		V_5 = L_13;
+		JellyVertexU5BU5D_tCF4E2CD5F0DD4CB0DAED2A829E2C4D917893DE6E* L_12 = V_3;
+		int32_t L_13 = V_4;
+		NullCheck(L_12);
+		int32_t L_14 = L_13;
+		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_15 = (L_12)->GetAt(static_cast<il2cpp_array_size_t>(L_14));
+		V_5 = L_15;
 		// Vector3 target = _transform.TransformPoint(_verticesArray[vertex.ID]);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_14 = __this->____transform_10;
-		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_15 = __this->____verticesArray_13;
-		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_16 = V_5;
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_16 = __this->____transform_10;
+		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_17 = __this->____verticesArray_13;
+		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_18 = V_5;
+		NullCheck(L_18);
+		int32_t L_19 = L_18->___ID_0;
+		NullCheck(L_17);
+		int32_t L_20 = L_19;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_21 = (L_17)->GetAt(static_cast<il2cpp_array_size_t>(L_20));
 		NullCheck(L_16);
-		int32_t L_17 = L_16->___ID_0;
-		NullCheck(L_15);
-		int32_t L_18 = L_17;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_19 = (L_15)->GetAt(static_cast<il2cpp_array_size_t>(L_18));
-		NullCheck(L_14);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_20;
-		L_20 = Transform_TransformPoint_m05BFF013DB830D7BFE44A007703694AE1062EE44(L_14, L_19, NULL);
-		V_6 = L_20;
-		// float intensityNow = intensity - temp * (boundsMaxY - target.y);
-		float L_21 = __this->___intensity_4;
-		float L_22 = V_2;
-		float L_23 = V_1;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_24 = V_6;
-		float L_25 = L_24.___y_3;
-		V_7 = ((float)il2cpp_codegen_subtract(L_21, ((float)il2cpp_codegen_multiply(L_22, ((float)il2cpp_codegen_subtract(L_23, L_25))))));
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_22;
+		L_22 = Transform_TransformPoint_m05BFF013DB830D7BFE44A007703694AE1062EE44(L_16, L_21, NULL);
+		V_6 = L_22;
+		// float intensityNow = intensity - optimizedTemp * (boundsMaxY - target.y);
+		float L_23 = __this->___intensity_4;
+		float L_24 = V_2;
+		float L_25 = V_1;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_26 = V_6;
+		float L_27 = L_26.___y_3;
+		V_7 = ((float)il2cpp_codegen_subtract(L_23, ((float)il2cpp_codegen_multiply(L_24, ((float)il2cpp_codegen_subtract(L_25, L_27))))));
 		// vertex.Shake(target, mass, stiffness, damping);
-		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_26 = V_5;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_27 = V_6;
-		float L_28 = __this->___mass_5;
-		float L_29 = __this->___stiffness_6;
-		float L_30 = __this->___damping_7;
-		NullCheck(L_26);
-		JellyVertex_Shake_m96E88DCDBE19A970EE250F1B5ED04C452BA751DD(L_26, L_27, L_28, L_29, L_30, NULL);
+		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_28 = V_5;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_29 = V_6;
+		float L_30 = __this->___mass_5;
+		float L_31 = __this->___stiffness_6;
+		float L_32 = __this->___damping_7;
+		NullCheck(L_28);
+		JellyVertex_Shake_m96E88DCDBE19A970EE250F1B5ED04C452BA751DD(L_28, L_29, L_30, L_31, L_32, NULL);
 		// target = _transform.InverseTransformPoint(vertex.Position);
-		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_31 = __this->____transform_10;
-		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_32 = V_5;
-		NullCheck(L_32);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_33 = L_32->___Position_1;
-		NullCheck(L_31);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_34;
-		L_34 = Transform_InverseTransformPoint_m18CD395144D9C78F30E15A5B82B6670E792DBA5D(L_31, L_33, NULL);
-		V_6 = L_34;
+		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_33 = __this->____transform_10;
+		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_34 = V_5;
+		NullCheck(L_34);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_35 = L_34->___Position_1;
+		NullCheck(L_33);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_36;
+		L_36 = Transform_InverseTransformPoint_m18CD395144D9C78F30E15A5B82B6670E792DBA5D(L_33, L_35, NULL);
+		V_6 = L_36;
 		// _verticesArray[vertex.ID] =
 		//     Vector3.Lerp(_verticesArray[vertex.ID], target, intensityNow);
-		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_35 = __this->____verticesArray_13;
-		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_36 = V_5;
-		NullCheck(L_36);
-		int32_t L_37 = L_36->___ID_0;
-		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_38 = __this->____verticesArray_13;
-		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_39 = V_5;
-		NullCheck(L_39);
-		int32_t L_40 = L_39->___ID_0;
+		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_37 = __this->____verticesArray_13;
+		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_38 = V_5;
 		NullCheck(L_38);
-		int32_t L_41 = L_40;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_42 = (L_38)->GetAt(static_cast<il2cpp_array_size_t>(L_41));
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_43 = V_6;
-		float L_44 = V_7;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_45;
-		L_45 = Vector3_Lerp_m3A906D0530A94FAABB94F0F905E84D99BE85C3F8_inline(L_42, L_43, L_44, NULL);
-		NullCheck(L_35);
-		(L_35)->SetAt(static_cast<il2cpp_array_size_t>(L_37), (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2)L_45);
-		int32_t L_46 = V_4;
-		V_4 = ((int32_t)il2cpp_codegen_add(L_46, 1));
+		int32_t L_39 = L_38->___ID_0;
+		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_40 = __this->____verticesArray_13;
+		JellyVertex_tFB2CDFE00D78C9A997BF3DBE8785B2C140BD2196* L_41 = V_5;
+		NullCheck(L_41);
+		int32_t L_42 = L_41->___ID_0;
+		NullCheck(L_40);
+		int32_t L_43 = L_42;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_44 = (L_40)->GetAt(static_cast<il2cpp_array_size_t>(L_43));
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_45 = V_6;
+		float L_46 = V_7;
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_47;
+		L_47 = Vector3_Lerp_m3A906D0530A94FAABB94F0F905E84D99BE85C3F8_inline(L_44, L_45, L_46, NULL);
+		NullCheck(L_37);
+		(L_37)->SetAt(static_cast<il2cpp_array_size_t>(L_39), (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2)L_47);
+		int32_t L_48 = V_4;
+		V_4 = ((int32_t)il2cpp_codegen_add(L_48, 1));
 	}
 
-IL_00e8:
+IL_00f5:
 	{
 		// foreach (JellyVertex vertex in _jellyVertices)
-		int32_t L_47 = V_4;
-		JellyVertexU5BU5D_tCF4E2CD5F0DD4CB0DAED2A829E2C4D917893DE6E* L_48 = V_3;
-		NullCheck(L_48);
-		if ((((int32_t)L_47) < ((int32_t)((int32_t)(((RuntimeArray*)L_48)->max_length)))))
+		int32_t L_49 = V_4;
+		JellyVertexU5BU5D_tCF4E2CD5F0DD4CB0DAED2A829E2C4D917893DE6E* L_50 = V_3;
+		NullCheck(L_50);
+		if ((((int32_t)L_49) < ((int32_t)((int32_t)(((RuntimeArray*)L_50)->max_length)))))
 		{
-			goto IL_004d;
+			goto IL_005a;
 		}
 	}
 	{
 		// _cloneMesh.vertices = _verticesArray;
-		Mesh_t6D9C539763A09BC2B12AEAEF36F6DFFC98AE63D4* L_49 = __this->____cloneMesh_12;
-		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_50 = __this->____verticesArray_13;
-		NullCheck(L_49);
-		Mesh_set_vertices_m5BB814D89E9ACA00DBF19F7D8E22CB73AC73FE5C(L_49, L_50, NULL);
+		Mesh_t6D9C539763A09BC2B12AEAEF36F6DFFC98AE63D4* L_51 = __this->____cloneMesh_12;
+		Vector3U5BU5D_tFF1859CCE176131B909E2044F76443064254679C* L_52 = __this->____verticesArray_13;
+		NullCheck(L_51);
+		Mesh_set_vertices_m5BB814D89E9ACA00DBF19F7D8E22CB73AC73FE5C(L_51, L_52, NULL);
 		// }
 		return;
 	}

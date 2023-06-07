@@ -1,13 +1,14 @@
 using NTC.Global.System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 namespace Game.Gameplay
 {
     public class AudioManager : Singleton<AudioManager>
     {
         [SerializeField] private AudioMixerGroup masterMixer;
-        [SerializeField] private SettingsUI settingsUI;
+        [FormerlySerializedAs("settingsIuiCanvas")] [FormerlySerializedAs("settingsUICanvas")] [SerializeField] private SettingsUI settingsUI;
         [SerializeField] private AudioMixerSnapshot mainSnapshot;
         [SerializeField] private AudioMixerSnapshot menuSnapshot;
         

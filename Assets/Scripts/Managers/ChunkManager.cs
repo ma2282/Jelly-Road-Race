@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using NTC.Global.System;
@@ -18,6 +17,12 @@ namespace Game.Gameplay
         private Transform _transform;
         
         private void Start()
+        {
+            if (_transform == null)
+                Initialize();
+        }
+
+        private void Initialize()
         {
             _transform = GetComponent<Transform>();
 
@@ -70,6 +75,9 @@ namespace Game.Gameplay
 
         public void Reset()
         {
+            if (_transform == null)
+                _transform = transform;
+            
             foreach (Chunk chunk in chunks)
                 Destroy(chunk.gameObject);
 

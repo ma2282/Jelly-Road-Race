@@ -7,14 +7,14 @@ namespace Game.Gameplay
 {
     public class UIManager : Singleton<UIManager>
     {
-        [SerializeField] private StartUI startUI;
-        [SerializeField] private GameplayUI gameplayUI;
-        [SerializeField] private PauseMenuUI pauseMenuUI;
-        [SerializeField] private GameOverUI gameOverUI;
-        [SerializeField] private SettingsUI settingsUI;
-        [SerializeField] private ShopUI shopUI;
+        [SerializeField] private StartUI startUi;
+        [SerializeField] private GameplayUI gameplayUi;
+        [SerializeField] private PauseMenuUI pauseMenuUi;
+        [SerializeField] private GameOverUI gameOverUi;
+        [SerializeField] private SettingsUI settingsUi;
+        [SerializeField] private ShopUI shopUi;
             
-        private List<GameObject> _UIs;
+        private List<IUICanvas> _UIs;
         
         private void Start()
         {
@@ -24,22 +24,18 @@ namespace Game.Gameplay
 
         private void Initialize()
         {
-            startUI.Initialize();
-            gameplayUI.Initialize();
-            pauseMenuUI.Initialize();
-            gameOverUI.Initialize();
-            settingsUI.Initialize();
-            shopUI.Initialize();
-
-            _UIs = new List<GameObject>
+            _UIs = new List<IUICanvas>
             {
-                startUI.gameObject,
-                gameplayUI.gameObject,
-                pauseMenuUI.gameObject,
-                gameOverUI.gameObject,
-                settingsUI.gameObject,
-                shopUI.gameObject
+                startUi,
+                gameplayUi,
+                pauseMenuUi,
+                gameOverUi,
+                settingsUi,
+                shopUi
             };
+
+            foreach (IUICanvas uiCanvas in _UIs)
+                uiCanvas.Initialize();
         }
 
         public void ShowUI(GameState gameState)
@@ -47,36 +43,41 @@ namespace Game.Gameplay
             if (_UIs == null)
                 Initialize();
             
-            GameObject UIToShow = gameState switch
+            IUICanvas uiToShow = gameState switch
             {
-                GameState.Started => gameplayUI.gameObject,
-                GameState.Stopped => startUI.gameObject,
-                GameState.Finished => gameOverUI.gameObject,
+                GameState.Started => gameplayUi,
+                GameState.Stopped => startUi,
+                GameState.Finished => gameOverUi,
                 _ => throw new ArgumentOutOfRangeException(nameof(gameState), gameState, null)
             };
 
-            foreach (GameObject UI in _UIs)
-                UI.gameObject.SetActive(UI == UIToShow);
+            foreach (IUICanvas UI in _UIs)
+            {
+                if (UI == uiToShow)
+                    UI.Open();
+                else
+                    UI.Close();
+            }
         }
 
         public void ShowSettings()
         {
-            settingsUI.gameObject.SetActive(true);
+            settingsUi.Open();
         }
         
         public void ShowShop()
         {
-            shopUI.gameObject.SetActive(true);
+            shopUi.Open();
         }
 
         public void ChangeCoins(int coins)
         {
-            shopUI.ChangeCoins(coins);
-            gameplayUI.ChangeCoins(coins);
+            shopUi.ChangeCoins(coins);
+            gameplayUi.ChangeCoins(coins);
         } 
 
-        public void ChangeScore(int score) => gameplayUI.ChangeScore(score);
+        public void ChangeScore(int score) => gameplayUi.ChangeScore(score);
 
-        public void ChangeRecordScore(int recordScore) => pauseMenuUI.ChangeRecordScore(recordScore);
+        public void ChangeRecordScore(int recordScore) => pauseMenuUi.ChangeRecordScore(recordScore);
     }
 }

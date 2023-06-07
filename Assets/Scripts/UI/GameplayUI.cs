@@ -1,15 +1,14 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.Gameplay
 {
-    public class GameplayUI : MonoBehaviour
+    public class GameplayUI : UICanvas
     {
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI coinsText;
-        
+
         private int _score;
         private int _coins;
 
@@ -18,9 +17,6 @@ namespace Game.Gameplay
             LayoutRebuilder.ForceRebuildLayoutImmediate(scoreText.rectTransform);
             LayoutRebuilder.ForceRebuildLayoutImmediate(coinsText.rectTransform);
         }
-
-        public void Initialize()
-        {}
 
         public void ChangeCoins(int coins)
         {

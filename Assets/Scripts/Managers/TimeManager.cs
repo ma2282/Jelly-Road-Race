@@ -36,7 +36,8 @@ namespace Game.Gameplay
         {
             while (true)
             {
-                TimeScale += timeRate / TimeScale;
+                if (!IsPaused)
+                    TimeScale += timeRate / TimeScale;
                 yield return new WaitForSeconds(1f);
             }
         }

@@ -4,32 +4,17 @@ using UnityEngine.UI;
 
 namespace Game.Gameplay
 {
-    public class SettingsUI : MonoBehaviour
+    public class SettingsUI : UICanvas
     {
         [SerializeField] public Button exitButton;
         [SerializeField] public ToggleSlider volumeToggle;
         [SerializeField] public ToggleSlider musicToggle;
 
-        public void Initialize()
+        public override void Initialize()
         {
-            exitButton.onClick.AddListener(ExitSettings);
-            volumeToggle.onClick.AddListener(ChangeVolume);
-            musicToggle.onClick.AddListener(ChangeMusic);
-        }
-
-        private void ExitSettings()
-        {
-            gameObject.SetActive(false);
-        }
-
-        private void ChangeVolume(float value)
-        {
-            AudioManager.Instance.ChangeVolume(value);
-        }
-
-        private void ChangeMusic(float value)
-        {
-            AudioManager.Instance.ChangeMusicVolume(value);
+            exitButton.onClick.AddListener(Close);
+            volumeToggle.onClick.AddListener(AudioManager.Instance.ChangeVolume);
+            musicToggle.onClick.AddListener(AudioManager.Instance.ChangeMusicVolume);
         }
 
         public void InitializeVolume(float volume, float musicVolume)

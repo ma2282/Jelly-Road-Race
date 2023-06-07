@@ -759,8 +759,8 @@ extern void JellyMesh_Start_mCAA83138A19BB1A442CB34120708F175D0795ECF (void);
 extern void JellyMesh_InitializeMesh_mEB89865EAACEF107290B67AA72D31F8F54C95A76 (void);
 // 0x00000186 System.Void Game.Gameplay.JellyMesh::SetMeshFromSkin(Game.Gameplay.ReadonlySkin)
 extern void JellyMesh_SetMeshFromSkin_mE97869E0697D75F697DB60A28896413D9DBA1D76 (void);
-// 0x00000187 System.Void Game.Gameplay.JellyMesh::FixedUpdate()
-extern void JellyMesh_FixedUpdate_mE6CFE484651843BC25C38FA9D534AD13B5D99AD3 (void);
+// 0x00000187 System.Void Game.Gameplay.JellyMesh::Update()
+extern void JellyMesh_Update_m92DAD7FAC5ED7917C6223F3CDBCA840681F668CC (void);
 // 0x00000188 System.Void Game.Gameplay.JellyMesh::Reset()
 extern void JellyMesh_Reset_m71232EDF40414D50EED7E0B35F00B128003EE9EA (void);
 // 0x00000189 System.Void Game.Gameplay.JellyMesh::.ctor()
@@ -1377,7 +1377,7 @@ static Il2CppMethodPointer s_methodPointers[506] =
 	JellyMesh_Start_mCAA83138A19BB1A442CB34120708F175D0795ECF,
 	JellyMesh_InitializeMesh_mEB89865EAACEF107290B67AA72D31F8F54C95A76,
 	JellyMesh_SetMeshFromSkin_mE97869E0697D75F697DB60A28896413D9DBA1D76,
-	JellyMesh_FixedUpdate_mE6CFE484651843BC25C38FA9D534AD13B5D99AD3,
+	JellyMesh_Update_m92DAD7FAC5ED7917C6223F3CDBCA840681F668CC,
 	JellyMesh_Reset_m71232EDF40414D50EED7E0B35F00B128003EE9EA,
 	JellyMesh__ctor_m91112AA41AC320CDECB25CAF0A3D63A577E4578F,
 	JellyVertex__ctor_m9615F52E1AC58900D47966A34C36FDD36648965A,

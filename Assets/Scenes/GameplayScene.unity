@@ -194,6 +194,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1203ce0063ac95439af3f462b71a548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1350820810 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8268530831262238793, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
+  m_PrefabInstance: {fileID: 1481977062090893207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &1468857637 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1630064004, guid: 12c565aa888ae194bad6b0d9b9de6e55, type: 3}
@@ -298,27 +309,27 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 781444171}
     - target: {fileID: 3112225400517396679, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: shopUI
+      propertyPath: shopUi
       value: 
       objectReference: {fileID: 1481977062090893208}
     - target: {fileID: 3112225400517396679, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: startUI
+      propertyPath: startUi
       value: 
       objectReference: {fileID: 1768425643}
     - target: {fileID: 3112225400517396679, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: gameOverUI
+      propertyPath: gameOverUi
       value: 
       objectReference: {fileID: 1481977062090893212}
     - target: {fileID: 3112225400517396679, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: gameplayUI
+      propertyPath: gameplayUi
       value: 
       objectReference: {fileID: 1260425605}
     - target: {fileID: 3112225400517396679, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: settingsUI
+      propertyPath: settingsUi
       value: 
       objectReference: {fileID: 1018965719}
     - target: {fileID: 3112225400517396679, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: pauseMenuUI
+      propertyPath: pauseMenuUi
       value: 
       objectReference: {fileID: 750911591}
     - target: {fileID: 3763365135877038526, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
@@ -326,15 +337,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1018965719}
     - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: fogImage
+      propertyPath: trailRenderer
       value: 
-      objectReference: {fileID: 1657137162}
+      objectReference: {fileID: 1468857637}
     - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
       propertyPath: _mainColorsInventory
       value: 
       objectReference: {fileID: 781444167}
     - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: mainRenderers.Array.data[0]
+      propertyPath: images.Array.data[0]
+      value: 
+      objectReference: {fileID: 1350820810}
+    - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
+      propertyPath: images.Array.data[1]
+      value: 
+      objectReference: {fileID: 1657137162}
+    - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
+      propertyPath: renderersWithAlpha.Array.data[0]
       value: 
       objectReference: {fileID: 1468857637}
     - target: {fileID: 8221653457379395122, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}

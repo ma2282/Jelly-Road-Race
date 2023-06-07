@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Game.Gameplay
 {
-    public class ShopUI : MonoBehaviour
+    public class ShopUI : UICanvas
     {
         [SerializeField] private Color lockedSkinColor = Color.black;
         [SerializeField] private Button exitButton;
@@ -26,9 +26,9 @@ namespace Game.Gameplay
             LayoutRebuilder.ForceRebuildLayoutImmediate(coinsText.rectTransform);
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
-            exitButton.onClick.AddListener(ExitSettings);
+            exitButton.onClick.AddListener(Close);
             buyCoins1Button.onClick.AddListener(ShowAd);
             scrollSnap.OnPanelSelected.AddListener(SetSkinIndex);
             selectSkinButton.onClick.AddListener(SelectSkin);
@@ -38,11 +38,6 @@ namespace Game.Gameplay
             
             for (int i = 0; i < skins.Length; i++)
                 skins[i].color = SkinsManager.Instance.GetSkin(i).IsLocked ? lockedSkinColor : Color.white;
-        }
-
-        private void ExitSettings()
-        {
-            gameObject.SetActive(false);
         }
 
         private void ShowAd()
