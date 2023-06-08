@@ -158,10 +158,10 @@ static const int32_t s_InvokerIndices[35] =
 	2923,
 	4661,
 	4636,
-	5483,
-	6303,
-	6784,
-	6773,
+	5484,
+	6305,
+	6786,
+	6775,
 	4759,
 	1844,
 	4759,
@@ -177,7 +177,7 @@ static const int32_t s_InvokerIndices[35] =
 	3492,
 	4759,
 	4759,
-	7067,
+	7069,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Microsoft_NET_StringTools_CodeGenModule;
 const Il2CppCodeGenModule g_Microsoft_NET_StringTools_CodeGenModule = 
