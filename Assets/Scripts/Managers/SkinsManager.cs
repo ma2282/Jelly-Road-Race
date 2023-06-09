@@ -4,22 +4,27 @@ using System.Linq;
 using NTC.Global.System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Game.Gameplay
 {
     public class SkinsManager : Singleton<SkinsManager>
     {
-        [SerializeField] private Skin skinNow;
         [SerializeField] private List<Skin> allSkins;
         [SerializeField] private Transform skinParentTransform;
 
+        private SkinObject _skinNow;
+        
         public UnityEvent<ReadonlySkin> OnSkinChanged;
 
+        public int SkinsCount => allSkins.Count;
+        
+        
         public void InitializeSkins(List<bool> skinLockedStates, SkinType skinNowType)
         {
-            Skin skin = allSkins.FirstOrDefault(x => x.Type == skinNowType) ?? allSkins[0];
+            Skin savedSkin = allSkins.FirstOrDefault(x => x.Type == skinNowType) ?? allSkins[0];
 
-            SetSkinObject(skin);
+            SetSkinObject(savedSkin);
             
             for (int i = 0; i < allSkins.Count; i++)
                 allSkins[i].IsLocked = skinLockedStates.Count < allSkins.Count || skinLockedStates[i];
@@ -30,16 +35,12 @@ namespace Game.Gameplay
         {
             if (skin == null) return;
 
-            GameObject skinToDestroy = skinNow.Object;
+            if (_skinNow != null)
+                Destroy(_skinNow.gameObject);
             
-            skinNow.Object = Instantiate(skin.Object, Vector3.zero, Quaternion.identity, skinParentTransform);
-            skinNow.Object.transform.localPosition = Vector3.zero;
-            skinNow.Type = skin.Type;
+            _skinNow = Instantiate(skin.Prefab, skinParentTransform);
 
-            if (skinToDestroy != null)
-                Destroy(skinToDestroy);
-
-            OnSkinChanged?.Invoke(new ReadonlySkin(skinNow));
+            OnSkinChanged?.Invoke(new ReadonlySkin(skin, _skinNow));
         }
 
         public ReadonlySkin GetSkin(int index) => new (allSkins[index]);
@@ -53,7 +54,7 @@ namespace Game.Gameplay
 
         public SaveData Save()
         {
-            SaveData data = new (){SkinLockedStates = allSkins.Select(x => x.IsLocked).ToList(), SkinNowType = skinNow.Type};
+            SaveData data = new (){SkinLockedStates = allSkins.Select(x => x.IsLocked).ToList(), SkinNowType = _skinNow.Type};
 
             return data;
         }

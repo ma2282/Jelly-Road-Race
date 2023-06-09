@@ -388,32 +388,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 703611fd58f24087b80a7f67b8d89e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinNow:
-    IsLocked: 0
-    Price: 0
-    Object: {fileID: 0}
-    Type: 0
   allSkins:
-  - IsLocked: 0
-    Price: 0
-    Object: {fileID: 6865303313761562001, guid: af9ebd428e3915d4c8461b1163cb362e, type: 3}
-    Type: 0
-  - IsLocked: 1
-    Price: 200
-    Object: {fileID: 7388434126556423222, guid: fa845d5966c779f449adfbcd27b08fb4, type: 3}
-    Type: 1
-  - IsLocked: 1
-    Price: 1000
-    Object: {fileID: 6088953764995169331, guid: f06cf47afd018434793fd35b7a0c6d29, type: 3}
-    Type: 2
-  - IsLocked: 1
-    Price: 1500
-    Object: {fileID: 74225646245814404, guid: 19995a7d9b5c9524e990a8b004100cb5, type: 3}
-    Type: 4
-  - IsLocked: 1
-    Price: 2000
-    Object: {fileID: 3586328541712902326, guid: 21704265da7790b43b754f93e0184497, type: 3}
-    Type: 3
+  - {fileID: 11400000, guid: e74e0676129968a4eb375e6c9ab3b620, type: 2}
+  - {fileID: 11400000, guid: 01b733202f3a4774593fc1cb9864703f, type: 2}
+  - {fileID: 11400000, guid: 3f779a359ae4f5f4f83cc8310c1f1167, type: 2}
+  - {fileID: 11400000, guid: 1982cd9f99780e24e8a29b91dae8dab6, type: 2}
+  - {fileID: 11400000, guid: 3a1e4946b9d69e84d913165c007841e0, type: 2}
   skinParentTransform: {fileID: 0}
   OnSkinChanged:
     m_PersistentCalls:
@@ -927,9 +907,8 @@ MonoBehaviour:
   images:
   - {fileID: 0}
   - {fileID: 0}
-  renderersWithoutAlpha: []
-  renderersWithAlpha:
-  - {fileID: 0}
+  trailRenderer: {fileID: 0}
+  playerRenderer: {fileID: 0}
   _postProcessProfile: {fileID: 11400000, guid: e6c030c777613b54da50d5736a81b150, type: 2}
   _mainColorsInventory: {fileID: 0}
 --- !u!1 &3138042989676932912

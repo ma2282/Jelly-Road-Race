@@ -4,19 +4,19 @@ namespace Game.Gameplay
 {
     public struct ReadonlySkin
     {
-        public bool IsLocked;
-        public int Price;
-        public MeshRenderer Renderer;
-        public MeshFilter Filter;
-        public SkinType Type;
-        
-        public ReadonlySkin(Skin skin)
+        public readonly bool IsLocked;
+        public readonly int Price;
+        public readonly SkinType Type;
+        public readonly Sprite Sprite;
+        public readonly SkinObject SkinObject;
+
+        public ReadonlySkin(Skin skin, SkinObject skinObject = null)
         {
             IsLocked = skin.IsLocked;
             Price = skin.Price;
             Type = skin.Type;
-            Renderer = skin.Object.GetComponent<MeshRenderer>();
-            Filter = skin.Object.GetComponent<MeshFilter>();
+            Sprite = skin.Sprite;
+            SkinObject = skinObject;
         }
     }
 }

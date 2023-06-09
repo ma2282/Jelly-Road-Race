@@ -5,10 +5,7 @@ namespace Game.Gameplay
     public class Player : MonoBehaviour, IObstacleReceiver, IColorAbilityReceiver
     {
         [SerializeField] private MovementController _movementController;
-        [SerializeField] private AnimationsHandler _animationsHandler;
         [SerializeField] private HealthHandler _healthHandler;
-        [SerializeField] private TrailHandler _trailHandler;
-        [SerializeField] private JellyMesh _jellyMesh;
         [SerializeField] private ColorsInventory _colorsInventory;
         [SerializeField] private JumpController _jumpController;
 
@@ -16,21 +13,9 @@ namespace Game.Gameplay
 
         private void Awake()
         {
-            SkinsManager.Instance.OnSkinChanged.AddListener(x => _jellyMesh.SetMeshFromSkin(x));
             SkinsManager.Instance.OnSkinChanged.AddListener(ColorsManager.Instance.ChangePlayerRenderer);
-            
-            _movementController.OnMovingStart.AddListener(_animationsHandler.DeactivateIdle);
-            _movementController.OnMovingEnd.AddListener(_animationsHandler.ActivateIdle);
-            
-            _movementController.OnMovingStart.AddListener(_trailHandler.DeactivateTrail);
-            _movementController.OnMovingEnd.AddListener(_trailHandler.ActivateTrail);
-            
-            _jumpController.OnJumpingStart.AddListener(_trailHandler.DeactivateTrail);
-            _jumpController.OnJumpingEnd.AddListener(_trailHandler.ActivateTrail);
-            
-            _healthHandler.OnHeal.AddListener(_animationsHandler.TriggerHeal);
-            _healthHandler.OnTakeDamage.AddListener(_animationsHandler.TriggerDamage);
-            
+            SkinsManager.Instance.OnSkinChanged.AddListener(_movementController.SetSkinObject);
+
             _healthHandler.OnKilled.AddListener(() => GameManager.Instance.GameState = GameState.Finished);
             
             _colorsInventory.Reset(this);
@@ -42,7 +27,6 @@ namespace Game.Gameplay
             _colorsInventory.Reset(this);
             _movementController.ResetPosition();
             _movementController.ResetParams();
-            _jellyMesh.Reset();
         }
 
         public void ReceiveObstacle(IObstacle obstacle)

@@ -75,14 +75,6 @@ namespace Game.Gameplay
             Instantiate(part2, partChunkSampleSecondPosition + position, Quaternion.identity, _transform);
         }
 
-        public void SpawnTrail(GameObject trail)
-        {
-            if (_transform == null)
-                Initialize();
-            
-            Instantiate(trail, trail.transform.position, Quaternion.identity, _transform);
-        }
-
         public void StartMoving()
         {
             _isMoving = true;

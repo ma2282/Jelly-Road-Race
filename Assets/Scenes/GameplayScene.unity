@@ -205,11 +205,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &1468857637 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1630064004, guid: 12c565aa888ae194bad6b0d9b9de6e55, type: 3}
-  m_PrefabInstance: {fileID: 5151966388403410457}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1657137162 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1481977062830988075, guid: cdb754b95b20bf74fa007deb0297ffe3, type: 3}
@@ -337,10 +332,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1018965719}
     - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: trailRenderer
-      value: 
-      objectReference: {fileID: 1468857637}
-    - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
       propertyPath: _mainColorsInventory
       value: 
       objectReference: {fileID: 781444167}
@@ -352,10 +343,6 @@ PrefabInstance:
       propertyPath: images.Array.data[1]
       value: 
       objectReference: {fileID: 1657137162}
-    - target: {fileID: 4457222102899544650, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
-      propertyPath: renderersWithAlpha.Array.data[0]
-      value: 
-      objectReference: {fileID: 1468857637}
     - target: {fileID: 8221653457379395122, guid: 618d66e1cd3b5ba4cac7854051b07106, type: 3}
       propertyPath: skinParentTransform
       value: 

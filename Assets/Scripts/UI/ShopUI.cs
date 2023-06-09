@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DanielLochner.Assets.SimpleScrollSnap;
 using TMPro;
 using UnityEngine;
@@ -15,12 +16,15 @@ namespace Game.Gameplay
         [SerializeField] private TextMeshProUGUI unlockText;
         [SerializeField] private Button buyCoins1Button;
         [SerializeField] private SimpleScrollSnap scrollSnap;
-        [SerializeField] private Image[] skins;
+        [SerializeField] private Transform skinsParent;
+        [SerializeField] private Image skinImagePrefab;
         [SerializeField] private TextMeshProUGUI coinsText;
-
+        
         private int _skinNowIndex;
         private int _skinNowPrice;
 
+        private List<Image> _skins;
+        
         private void Start()
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(coinsText.rectTransform);
@@ -35,9 +39,25 @@ namespace Game.Gameplay
             unlockSkinButton.onClick.AddListener(TryUnlockSkin);
 
             unlockSkinButton.gameObject.SetActive(false);
+
+            if (_skins == null)
+                InitializeSkins();
+        }
+
+        private void InitializeSkins()
+        {
+            _skins = new List<Image>(SkinsManager.Instance.SkinsCount);
             
-            for (int i = 0; i < skins.Length; i++)
-                skins[i].color = SkinsManager.Instance.GetSkin(i).IsLocked ? lockedSkinColor : Color.white;
+            for (int i = 0; i < SkinsManager.Instance.SkinsCount; i++)
+            {
+                Image image = Instantiate(skinImagePrefab, skinsParent);
+                ReadonlySkin skin = SkinsManager.Instance.GetSkin(i);
+                
+                image.sprite = skin.Sprite;
+                image.color = skin.IsLocked ? lockedSkinColor : Color.white;
+                
+                _skins.Add(image);
+            }
         }
 
         private void ShowAd()
@@ -53,7 +73,7 @@ namespace Game.Gameplay
             ValuesManager.Instance.Coins -= _skinNowPrice;
             
             unlockSkinButton.gameObject.SetActive(false);
-            skins[_skinNowIndex].color = Color.white;
+            _skins[_skinNowIndex].color = Color.white;
         }
 
         private void SetSkinIndex(int index)

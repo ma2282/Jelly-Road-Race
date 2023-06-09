@@ -62,11 +62,6 @@ namespace Game.Gameplay
             return chunk;
         }
 
-        public void SpawnTrail(GameObject trail)
-        {
-            chunks[0].SpawnTrail(trail);
-        }
-
         public void StartMoving()
         {
             foreach (Chunk chunk in chunks)

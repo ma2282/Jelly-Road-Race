@@ -60,7 +60,8 @@ namespace Game.Gameplay
 
         public void ChangePlayerRenderer(ReadonlySkin skin)
         {
-            playerRenderer = skin.Renderer;
+            playerRenderer = skin.SkinObject.Renderer;
+            trailRenderer = skin.SkinObject.TrailRenderer;
         }
     }
 }

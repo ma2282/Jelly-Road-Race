@@ -1,14 +1,16 @@
-using System;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 namespace Game.Gameplay
 {
-    [Serializable]
-    public class Skin
+    [CreateAssetMenu(menuName = "Gameplay/Skin", fileName = "Skin", order = 0)]
+    public class Skin : ScriptableObject
     {
         public bool IsLocked;
         public int Price;
-        public GameObject Object;
         public SkinType Type;
+        public Sprite Sprite;
+        public SkinObject Prefab;
     }
 }
